@@ -1,0 +1,64 @@
+{
+  "menu": [
+    {
+      "url": "/dashboard",
+      "name": "Dashboards",
+      "icon": "menu-icon tf-icons ri-home-smile-line",
+      "slug": "dashboard-analytics"
+    },
+    {
+      "url": "/properties",
+      "name": "Properties",
+      "icon": "menu-icon tf-icons ri-building-line",
+      "slug": "properties-list"
+    },
+    {
+      "url": "/property-type",
+      "name": "Property Types",
+      "icon": "menu-icon tf-icons ri-building-2-line",
+      "slug": "property-types"
+    },
+    {
+      "url": "/schedule-market-values",
+      "name": "Market Values",
+      "icon": "menu-icon tf-icons ri-exchange-dollar-line",
+      "slug": "schedule-market-values"
+    },
+    {
+      "url": "/gis-map",
+      "name": "GIS Map",
+      "icon": "menu-icon tf-icons ri-map-pin-range-fill",
+      "slug": "map-gis"
+    },
+    {
+      "menuHeader": "Assessment"
+    },
+    {
+      "url": "/assessment",
+      "name": "Property Assessment",
+      "icon": "menu-icon tf-icons ri-article-line",
+      "slug": "assessment-list"
+    },
+    {
+      "url": "/building-assessment",
+      "name": "Building Assessment",
+      "icon": "menu-icon tf-icons ri-calculator-line",
+      "slug": "assessment-list-building"
+    },
+    {
+      "url": "/request",
+      "name": "Request List",
+      "icon": "menu-icon tf-icons ri-file-pdf-2-line",
+      "slug": "request-list"
+    },
+    {
+      "menuHeader": "Management"
+    },
+    {
+      "url": "/assessor",
+      "name": "Assessors",
+      "icon": "menu-icon tf-icons ri-user-star-line",
+      "slug": "assessor-accounts"
+    }
+  ]
+}

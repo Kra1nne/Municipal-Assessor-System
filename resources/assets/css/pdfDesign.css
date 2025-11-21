@@ -1,0 +1,72 @@
+body {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  margin: 25px;
+}
+
+h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+}
+
+td {
+  padding: 3px;
+  vertical-align: top;
+  border: none;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.field {
+  display: inline-block;
+  border-bottom: 1px solid black;
+  min-width: 120px;
+  padding: 0 3px 2px 3px; /* Add bottom padding to push text down */
+  line-height: 1.2; /* Slightly taller lines to push text down */
+  vertical-align: bottom; /* Align text closer to the bottom */
+}
+
+.wide-field {
+  display: inline-block;
+  border-bottom: 1px solid black;
+  width: 70%;
+  padding: 1px 3px;
+  margin-left: 10px;
+}
+
+.location-field {
+  display: inline-block;
+  border-bottom: 1px solid black;
+  width: 70%;
+  padding: 1px 3px;
+  margin-left: 10px;
+}
+.line {
+  border: 2px solid black;
+  width: 100%;
+  margin-top: 13px;
+  margin-bottom: 8px;
+}
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkbox-container input {
+  margin: 0; /* Remove default margin */
+}
+
+.checkbox-container label {
+  font-size: 16px; /* Adjust label size as needed */
+  cursor: pointer; /* Make label clickable */
+}
