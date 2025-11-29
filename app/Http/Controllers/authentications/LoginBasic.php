@@ -27,7 +27,7 @@ class LoginBasic extends Controller
       'user_id' => $account->id,
       'action' => 'Login',
       'table_name' => 'Users',
-      'description' => $account->firstname.' '.$account->lastname .' is Successfully login',
+      'description' => 'Successfully login',
       'ip_address' => request()->ip(),
       'created_at' => now(),
     ];

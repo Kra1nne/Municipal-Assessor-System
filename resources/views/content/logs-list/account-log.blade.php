@@ -38,7 +38,7 @@
               </td>
               <td class="text-truncate">{{ $item->action }}</td>
               <td class="text-truncate">{{ $item->table_name }}</td>
-              <td class="text-truncate">{{ date('M. d, Y', strtotime($item->created_at)) }}</td>
+              <td class="text-truncate">{{ date('M. d, Y - h:m A', strtotime($item->created_at)) }}</td>
               <td class="text-truncate">
                 <div class="d-flex align-items-center">
                   @if ($item->role == "Admin")

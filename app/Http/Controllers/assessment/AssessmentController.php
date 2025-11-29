@@ -233,8 +233,6 @@ class AssessmentController extends Controller
     return $pdf->setPaper('A4', 'portrait')
                ->stream('Real Property Field Appraisal & Assessment Sheet.pdf');
   }
-
-
   public function buidingAssessment(){
     $classification = BuildingType::whereNull('deleted_at')->orderBy('created_at', 'Desc')->get();
 
@@ -261,6 +259,7 @@ class AssessmentController extends Controller
       ->orderBy('properties.created_at', 'Desc')->get();
 
     $properties->transform(function ($item) {
+        $item->building_status = $item->building_status ?? 'Under Review';
         $item->assessment_id = Crypt::encryptString($item->assessment_id);
         $item->property_id = Crypt::encryptString($item->building_id);
         $item->ids = Crypt::encryptString($item->id);
@@ -304,8 +303,15 @@ class AssessmentController extends Controller
             $query->where('properties.lot_number', 'LIKE', "%{$search}%");
       }
 
-      if (!empty($status)) {
-          $query->where('properties.status', $status);
+      if ($status) {
+          if ($status === "Under Review") {
+              $query->where(function ($q) {
+                  $q->whereNull('building.status')
+                    ->orWhere('building.status', 'Under Review');
+              });
+          } else {
+              $query->where('building.status', $status);
+          }
       }
 
       $properties = $query->orderBy('properties.created_at', 'asc')
@@ -314,6 +320,7 @@ class AssessmentController extends Controller
           ->get();
 
       $properties->transform(function ($item) {
+        $item->building_status = $item->building_status ?? 'Under Review';
         $item->assessment_id = Crypt::encryptString($item->assessment_id);
         $item->property_id = Crypt::encryptString($item->building_id);
         $item->ids = Crypt::encryptString($item->id);

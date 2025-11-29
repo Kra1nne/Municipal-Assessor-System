@@ -134,7 +134,7 @@
               <input type="file" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf" class="form-control mt-3" id="authorizing" name="authorizing" autofocus>
             </div>
             <div class="form-group mb-5">
-              <label for="">Updated Real Real Property Tax Payment</label>
+              <label for="">Updated Real Property Tax Payment</label>
               <input type="file" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf" class="form-control mt-3" id="updated_tax" name="updated_tax" autofocus>
             </div>
              <div class="form-group mb-5">

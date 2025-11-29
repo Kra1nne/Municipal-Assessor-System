@@ -54,6 +54,7 @@ class Analytics extends Controller
     $inactiveUsers = User::whereNotNull('deleted_at')->count();
     $log = Log::leftjoin('users', 'logs.user_id', '=', 'users.id')
                 ->leftjoin('person', 'users.person_id', '=', 'person.id')
+                ->select('logs.*', 'users.*', 'logs.created_at as created_at')
                 ->orderby('logs.created_at', 'desc')
                 ->limit(10)
                 ->get();
@@ -63,6 +64,7 @@ class Analytics extends Controller
     $log = Log::leftjoin('users', 'logs.user_id', '=', 'users.id')
           ->leftjoin('person', 'users.person_id', '=', 'person.id')
           ->where('logs.created_at', '>=', Carbon::now()->subDays(30))
+          ->select('logs.*', 'users.*', 'logs.created_at as created_at')
           ->orderBy('logs.created_at', 'desc')
           ->get();
 

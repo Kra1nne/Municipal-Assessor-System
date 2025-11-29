@@ -95,6 +95,7 @@ $(document).ready(function () {
   let searchQuery = '';
   let loading = false;
   let hasMore = true;
+  let statusFilter = '';
 
   function loadProperties(reset = false) {
     if (loading || (!hasMore && !reset)) return;
@@ -106,7 +107,7 @@ $(document).ready(function () {
       hasMore = true;
     }
 
-    $.get('/building-assessment/lazy', { page, search: searchQuery }, function (response) {
+    $.get('/building-assessment/lazy', { page, search: searchQuery, status: statusFilter }, function (response) {
       appendProperties(response.data);
       hasMore = response.hasMore;
       page++;
@@ -147,7 +148,7 @@ $(document).ready(function () {
               <td>₱ ${ConstructionCost.toLocaleString()}</td>
                <td>
                   <span class="badge bg-label-${property.building_status === 'Complete' ? 'success' : 'warning'}">
-                      ${property.building_status ?? 'Under Review'}
+                      ${property.building_status}
                   </span>
               </td>
               <td>
@@ -221,6 +222,7 @@ $(document).ready(function () {
   });
 
   $('#statusFilter').on('change', function () {
+    displayTotal = 0;
     statusFilter = $(this).val();
     loadProperties(true);
   });

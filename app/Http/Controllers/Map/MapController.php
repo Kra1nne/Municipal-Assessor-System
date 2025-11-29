@@ -203,46 +203,99 @@ class MapController extends Controller
         ];
     }
 
+    // public function searchLot(Request $request)
+    // {
+    //     $lot = $request->lot_number;
+    //     if (!$lot) {
+    //         return response()->json(['error' => 'Lot number required'], 400);
+    //     }
 
+    //     $role = Auth::user()->role;
 
+    //     if ($role == "Admin" || $role == "Employee") {
+    //         $properties = Property::leftJoin('assessment', 'properties.id', '=', 'assessment.properties_id')
+    //             ->leftjoin('assessor', 'assessment.assessor_id', '=', 'assessor.id')
+    //             ->leftjoin('property_type', 'assessment.property_type', '=', 'property_type.id')
+    //             ->leftjoin('market_value', 'assessment.market_id', '=', 'market_value.id')
+    //             ->leftjoin('property_list', 'market_value.property_list', '=', 'property_list.id')
+    //             ->select('properties.lot_number', 'properties.owner','properties.parcel_id')
+    //             ->get()
+    //             ->keyBy('parcel_id');
+    //     } else {
 
-    // ------------------------------------------------------------
-    // SEARCH LOT (FILTER BY USER ACCESS)
-    // ------------------------------------------------------------
+    //         $properties = Property::leftJoin('assessment', 'properties.id', '=', 'assessment.properties_id')
+    //             ->leftjoin('assessor', 'assessment.assessor_id', '=', 'assessor.id')
+    //             ->leftjoin('property_type', 'assessment.property_type', '=', 'property_type.id')
+    //             ->leftjoin('market_value', 'assessment.market_id', '=', 'market_value.id')
+    //             ->leftjoin('property_list', 'market_value.property_list', '=', 'property_list.id')
+    //             ->leftjoin('request', 'request.assessment_id', '=', 'assessment.id')
+    //             ->where('request.users_id', Auth::id())
+    //             ->select('properties.lot_number', 'properties.owner','properties.parcel_id')
+    //             ->get()
+    //             ->keyBy('parcel_id');
+    //     }
+
+    //     Block unauthorized search results
+    //     if (!isset($properties[$lot])) {
+    //         return [
+    //             'type' => 'FeatureCollection',
+    //             'features' => []
+    //         ];
+    //     }
+
+    //     Load GeoJSON
+    //     $geojsonPath = public_path('geojson/inopacan_geojson.geojson');
+    //     $geoData = json_decode(file_get_contents($geojsonPath), true);
+
+    //     foreach ($geoData['features'] as $feature) {
+    //         if (($feature['properties']['ID'] ?? '') == $lot) {
+
+    //             $feature['properties']['Owner'] = $properties[$lot]->owner;
+
+    //             return [
+    //                 'type' => 'FeatureCollection',
+    //                 'features' => [$feature]
+    //             ];
+    //         }
+    //     }
+
+    //     return [
+    //         'type' => 'FeatureCollection',
+    //         'features' => []
+    //     ];
+    // }
     public function searchLot(Request $request)
     {
         $lot = $request->lot_number;
+
         if (!$lot) {
             return response()->json(['error' => 'Lot number required'], 400);
         }
 
         $role = Auth::user()->role;
 
-        if ($role == "Admin" || $role == "Employee") {
-            $properties = Property::leftJoin('assessment', 'properties.id', '=', 'assessment.properties_id')
-                ->leftjoin('assessor', 'assessment.assessor_id', '=', 'assessor.id')
-                ->leftjoin('property_type', 'assessment.property_type', '=', 'property_type.id')
-                ->leftjoin('market_value', 'assessment.market_id', '=', 'market_value.id')
-                ->leftjoin('property_list', 'market_value.property_list', '=', 'property_list.id')
-                ->select('properties.lot_number', 'properties.owner','properties.parcel_id')
-                ->get()
-                ->keyBy('parcel_id');
-        } else {
+        // Build the initial query
+        $query = Property::leftJoin('assessment', 'properties.id', '=', 'assessment.properties_id')
+            ->leftJoin('assessor', 'assessment.assessor_id', '=', 'assessor.id')
+            ->leftJoin('property_type', 'assessment.property_type', '=', 'property_type.id')
+            ->leftJoin('market_value', 'assessment.market_id', '=', 'market_value.id')
+            ->leftJoin('property_list', 'market_value.property_list', '=', 'property_list.id')
+            ->select('properties.lot_number', 'properties.owner', 'properties.parcel_id');
 
-            $properties = Property::leftJoin('assessment', 'properties.id', '=', 'assessment.properties_id')
-                ->leftjoin('assessor', 'assessment.assessor_id', '=', 'assessor.id')
-                ->leftjoin('property_type', 'assessment.property_type', '=', 'property_type.id')
-                ->leftjoin('market_value', 'assessment.market_id', '=', 'market_value.id')
-                ->leftjoin('property_list', 'market_value.property_list', '=', 'property_list.id')
-                ->leftjoin('request', 'request.assessment_id', '=', 'assessment.id')
-                ->where('request.users_id', Auth::id())
-                ->select('properties.lot_number', 'properties.owner','properties.parcel_id')
-                ->get()
-                ->keyBy('parcel_id');
+        // Add user-based filtering if not Admin/Employee
+        if ($role != "Admin" && $role != "Employee") {
+            $query->leftJoin('request', 'request.assessment_id', '=', 'assessment.id')
+                  ->where('request.users_id', Auth::id());
         }
 
-        // Block unauthorized search results
-        if (!isset($properties[$lot])) {
+        // Filter by lot number using LIKE for partial matching
+        $query->where('properties.lot_number', 'like', "%{$lot}%")
+              ->orWhere('properties.owner', 'like', "%{$lot}%");
+
+        // Get properties and key them by parcel_id
+        $properties = $query->get()->keyBy('parcel_id');
+
+        if ($properties->isEmpty()) {
             return [
                 'type' => 'FeatureCollection',
                 'features' => []
@@ -253,22 +306,23 @@ class MapController extends Controller
         $geojsonPath = public_path('geojson/inopacan_geojson.geojson');
         $geoData = json_decode(file_get_contents($geojsonPath), true);
 
+        // Collect the features matching the lot
+        $features = [];
         foreach ($geoData['features'] as $feature) {
-            if (($feature['properties']['ID'] ?? '') == $lot) {
-
-                $feature['properties']['Owner'] = $properties[$lot]->owner;
-
-                return [
-                    'type' => 'FeatureCollection',
-                    'features' => [$feature]
-                ];
+            $featureLot = $feature['properties']['ID'] ?? '';
+            // Match lot number with geo data if it exists in properties
+            if (isset($properties[$featureLot])) {
+                $feature['properties']['Owner'] = $properties[$featureLot]->owner;
+                $features[] = $feature;
             }
         }
 
         return [
             'type' => 'FeatureCollection',
-            'features' => []
+            'features' => $features
         ];
     }
+
+
 
 }

@@ -104,13 +104,13 @@
                   </div>
                   <div>
                     <h6 class="mb-0 text-truncate">{{ $item->firstname }}</h6>
-                    <small class="text-truncate">{{ $item->email}}</small>
+                    <small class="text-trunpate">{{ $item->email}}</small>
                   </div>
                 </div>
               </td>
               <td class="text-truncate">{{ $item->action }}</td>
               <td class="text-truncate">{{ $item->table_name }}</td>
-              <td class="text-truncate">{{ date('M. d, Y', strtotime($item->created_at)) }}</td>
+              <td class="text-truncate">{{ date('M. d, Y - h:m A', strtotime($item->created_at)) }}</td>
               <td class="text-truncate">
                 <div class="d-flex align-items-center">
                   @if ($item->role == "Admin")

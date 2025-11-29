@@ -58,6 +58,12 @@
       "slug": "request-list"
     },
     {
+      "url": "/reports",
+      "name": "Reports",
+      "icon": "menu-icon tf-icons ri-printer-line",
+      "slug": "reports"
+    },
+    {
       "menuHeader": "Management"
     },
     {
@@ -68,7 +74,7 @@
     },
     {
       "url": "/assessor",
-      "name": "Assessor",
+      "name": "Personnel",
       "icon": "menu-icon tf-icons ri-user-star-line",
       "slug": "assessor-accounts"
     },

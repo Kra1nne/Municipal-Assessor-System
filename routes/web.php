@@ -107,6 +107,9 @@ Route::middleware(['auth', 'role:Admin,Employee,User', 'throttle:web'])->group(f
     Route::post('/building-assessment/add', [AssessmentController::class, 'buildingAssessmentStore'])->name('assessment-list-building-add');
     Route::post('/building-assessment/update', [AssessmentController::class, 'buildingAssessmentUpdate'])->name('assessment-list-building-update');
 
+    Route::get('/reports', [ReportsController::class, 'index'])->name('reports');
+    Route::post('/reports/pdf', [ReportsController::class, 'generateReports'])->name('reports-pdf-view');
+
     Route::get('/tax/pdf',[TaxController::class, 'viewPdf'])->name('tax-pdf');
     Route::get('/assessments/pdf/{id}', [AssessmentController::class, 'viewPdf'])->name('reports-pdf');
     Route::get('/building-assessment/pdf/{id}', [AssessmentController::class, 'buildingPDF'])->name('building-pdf');
