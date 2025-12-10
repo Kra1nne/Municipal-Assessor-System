@@ -23,7 +23,7 @@ class TaxController extends Controller
         ->whereNull('assessment.deleted_at')
         ->orderBy('properties.created_at', 'Desc')->first();
 
-      $OIC_Municilap_Assessor = Assessor::where('role', '=', 'OIC Municilap Assessor')
+      $OIC_Municilap_Assessor = Assessor::where('role', '=', 'OIC Municipal Assessor')
                                 ->selectRaw("CONCAT(assessor.firstname, ' ', assessor.middlename, ' ', assessor.lastname) as fullname")
                                 ->first();
 

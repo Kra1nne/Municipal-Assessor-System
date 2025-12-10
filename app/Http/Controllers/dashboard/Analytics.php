@@ -35,7 +35,9 @@ class Analytics extends Controller
                             ->where('request.assessment_id', '!=', null)
                             ->count();
 
-    $completecount = Requests::where('status', '=', 'Success')->count();
+    $completecount = Requests::where('status', '=', 'Success')
+                          ->where('users_id', '=', Auth::id())
+                          ->count();
     $completepending = Requests::where('status', '=', 'Request')->count();
 
 

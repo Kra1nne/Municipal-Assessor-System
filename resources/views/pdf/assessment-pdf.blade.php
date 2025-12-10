@@ -432,7 +432,7 @@
         Date
       </span>
       <span style="margin-left: 110px;">
-        Municilap Assesor
+        Municipal Assessor
       </span>
       <span style="margin-left: 65px;">
         Date

@@ -6,76 +6,82 @@
 
 <div class="container mb-2">
 
-        <!-- Admin Dashboard Stats (unchanged) -->
-        <header class="row mb-3">
+    <!-- Dashboard Cards -->
+    <header class="row mb-3">
 
-            <div class="col-xl-3 col-md-6 mb-3">
-                <div class="card h-100 shadow-sm">
+        <div class="col-xl-3 col-md-6 mb-3">
+            <div class="card h-100 shadow-sm">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div class="py-5">
-                    <p class="text-muted mb-2 fw-bolder">Total Properties</p>
-                    <h3 class="fw-bold mb-0">{{ $countall }}</h3>
-                    <small class="text-primary">All register properties</small>
+                        <p class="text-muted mb-2 fw-bolder">Total Properties</p>
+                        <h3 class="fw-bold mb-0">{{ $countall }}</h3>
+                        <small class="text-primary">All register properties</small>
                     </div>
                     <div class="text-primary fs-2">
-                    <i class="ri-building-line" style="font-size: 2.8rem;"></i>
+                        <i class="ri-building-line" style="font-size: 2.8rem;"></i>
                     </div>
                 </div>
-                </div>
             </div>
+        </div>
 
-            <div class="col-xl-3 col-md-6 mb-3">
-                <div class="card h-100 shadow-sm">
+        <div class="col-xl-3 col-md-6 mb-3">
+            <div class="card h-100 shadow-sm">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div class="py-5">
-                    <p class="text-muted mb-2 fw-bolder">Active Properties</p>
-                    <h3 class="fw-bold mb-0">{{ $countComplete }}</h3>
-                    <small class="text-success">Current active</small>
+                        <p class="text-muted mb-2 fw-bolder">Active Properties</p>
+                        <h3 class="fw-bold mb-0">{{ $countComplete }}</h3>
+                        <small class="text-success">Current active</small>
                     </div>
                     <div class="text-success fs-2">
-                    <i class="ri-building-line" style="font-size: 2.8rem;"></i>
+                        <i class="ri-building-line" style="font-size: 2.8rem;"></i>
                     </div>
                 </div>
-                </div>
             </div>
+        </div>
 
-            <div class="col-xl-3 col-md-6 mb-3">
-                <div class="card h-100 shadow-sm">
+        <div class="col-xl-3 col-md-6 mb-3">
+            <div class="card h-100 shadow-sm">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div class="py-5">
-                    <p class="text-muted mb-2 fw-bolder">Under Review</p>
-                    <h3 class="fw-bold mb-0">{{ $countReview }}</h3>
-                    <small class="text-muted">Under Review Properties</small>
+                        <p class="text-muted mb-2 fw-bolder">Under Review</p>
+                        <h3 class="fw-bold mb-0">{{ $countReview }}</h3>
+                        <small class="text-muted">Under Review Properties</small>
                     </div>
                     <div class="text-muted fs-2">
-                    <i class="ri-building-line" style="font-size: 2.8rem;"></i>
+                        <i class="ri-building-line" style="font-size: 2.8rem;"></i>
                     </div>
                 </div>
-                </div>
             </div>
+        </div>
 
-            <div class="col-xl-3 col-md-6 mb-3">
-                <div class="card h-100 shadow-sm">
+        <div class="col-xl-3 col-md-6 mb-3">
+            <div class="card h-100 shadow-sm">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div class="py-5">
-                    <p class="text-muted mb-2 fw-bolder">Total Value</p>
-                    <h3 class="fw-bold text-success mb-0">{{ $total }}</h3>
-                    <small class="text-muted">Total Assessed Value</small>
+                        <p class="text-muted mb-2 fw-bolder">Total Value</p>
+                        <h3 class="fw-bold text-success mb-0">{{ $total }}</h3>
+                        <small class="text-muted">Total Assessed Value</small>
                     </div>
                     <div class="text-success fs-2">
-                    <i class="ri-money-dollar-box-line" style="font-size: 2.8rem;"></i>
+                        <i class="ri-money-dollar-box-line" style="font-size: 2.8rem;"></i>
                     </div>
                 </div>
-                </div>
             </div>
+        </div>
 
-        </header>
+    </header>
 
     <main>
-        <input type="text" id="search-lot" placeholder="Search parcel id" class="form-control form-control-sm mb-2" style="width: 500px;">
+        <input
+            type="text"
+            id="search-lot"
+            placeholder="Search parcel or owner..."
+            class="form-control form-control-sm mb-2"
+            style="width: 500px;"
+        >
 
         <div class="card">
-          <div id="map" style="height: 700px; width: 100%; position: relative;"></div>
+            <div id="map" style="height: 700px; width: 100%; position: relative;"></div>
         </div>
     </main>
 </div>
@@ -84,110 +90,147 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <style>
-    .lot-label {
-        font-size: 12px;
-        font-weight: bold;
-        color: black;
-        background: rgba(255, 255, 255, 0.9);
-        padding: 2px 4px;
-        border: 1px solid #666;
-        border-radius: 4px;
-    }
+.lot-label {
+    font-size: 12px;
+    font-weight: bold;
+    color: black;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2px 4px;
+    border: 1px solid #666;
+    border-radius: 4px;
+}
+.legend {
+    line-height: 18px;
+    color: #555;
+    background: white;
+    padding: 6px 8px;
+    border-radius: 4px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
 </style>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
-    // Force labels when user role = User
-    @if(Auth::user()->role == "User")
-        const forceLabel = true;
-    @else
-        const forceLabel = false;
-    @endif
+    const forceLabel = @json(Auth::user()->role == "User");
 
-    // Create map
-    var map = L.map('map').setView([10.518201, 124.768402], 13);
+    // Color mapping for ActualUse
+    const useColor = {
+        Residentials: "blue",
+        Agricultural: "green",
+        Commercial: "yellow",
+        Industrial: "orange",
+        Mineral: "brown",
+        Timberland: "red",
+        null: "transparent",
+        "": "transparent"
+    };
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
+    // Initialize map
+    const map = L.map("map", { preferCanvas: true }).setView([10.518201, 124.768402], 13);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
 
+    // Function to style parcels
+    function styleFeature(feature) {
+        const actualUse = feature.properties.ActualUse;
+        return {
+            color: "gray",
+            weight: 1.5,
+            fillColor: actualUse in useColor ? useColor[actualUse] : "transparent",
+            fillOpacity: 0.6
+        };
+    }
 
-    // GEOJSON Layer
-    let geojsonLayer = L.geoJSON(null, {
-        onEachFeature: function (feature, layer) {
-
-            let lot = feature.properties.LotNumber ?? "Unknown";
-            let owner = feature.properties.Owner ?? "Unknown";
-
+    // Main GeoJSON layer
+    const parcelLayer = L.geoJSON(null, {
+        style: styleFeature,
+        onEachFeature: (feature, layer) => {
+            const p = feature.properties;
             layer.bindPopup(`
-                <b>Lot Number:</b> ${lot}<br>
-                <b>Owner:</b> ${owner}
+                <b>Lot:</b> ${p.LotNumber ?? "Unknown"}<br>
+                <b>Owner:</b> ${p.Owner ?? "Unknown"}<br>
+                <b>Use:</b> ${p.ActualUse ?? "N/A"}
             `);
 
-            // Always show labels for users
             if (forceLabel) {
                 layer.bindTooltip(
-                    `LOT: ${lot}<br>OWNER: ${owner}`,
-                    {
-                        permanent: true,
-                        direction: "center",
-                        className: "lot-label",
-                    }
-                ).openTooltip();
+                    `LOT: ${p.LotNumber}`,
+                    { permanent: true, className: "lot-label", direction: "center" }
+                );
             }
-
-            layer.setStyle({
-                color: "gray",
-                weight: 1,
-                fillColor: "transparent",
-                fillOpacity: 0.3
-            });
         }
     }).addTo(map);
 
+    // Add legend
+    const legend = L.control({ position: "bottomright" });
+    legend.onAdd = function(map) {
+        const div = L.DomUtil.create("div", "legend");
+        div.innerHTML = "<b>Zoning Classification</b><br>";
+        for (const key in useColor) {
+            if (key && useColor[key] !== "transparent") {
+                div.innerHTML +=
+                    '<i style="background:' + useColor[key] + '"></i> ' + key + '<br>';
+            }
+        }
+        return div;
+    };
+    legend.addTo(map);
 
-    /** Load visible parcels **/
-    function loadVisibleParcels() {
-        let b = map.getBounds();
-        let bbox = [b.getWest(), b.getSouth(), b.getEast(), b.getNorth()].join(',');
+    // Debounce function
+    function debounce(fn, delay = 300) {
+        let timer;
+        return (...args) => {
+            clearTimeout(timer);
+            timer = setTimeout(() => fn(...args), delay);
+        };
+    }
 
-        fetch(`{{ route('map-gis-parcel') }}?bbox=` + bbox)
+    // Load parcels
+    function loadParcels() {
+        const b = map.getBounds();
+        const bbox = `${b.getWest()},${b.getSouth()},${b.getEast()},${b.getNorth()}`;
+
+        fetch(`{{ route('map-gis-parcel') }}?bbox=${bbox}`)
             .then(res => res.json())
             .then(data => {
-                geojsonLayer.clearLayers();
-                geojsonLayer.addData(data);
+                data.features.forEach(f => {
+                    if (!f.properties.ActualUse) f.properties.ActualUse = null;
+                });
+                parcelLayer.clearLayers();
+                parcelLayer.addData(data);
             });
     }
 
-    map.on('moveend', loadVisibleParcels);
-    loadVisibleParcels();
+    const loadParcelsDebounced = debounce(loadParcels, 300);
+    map.on("moveend", loadParcelsDebounced);
+    loadParcels();
 
-
-    /** Search Lot **/
+    // Search functionality
     document.getElementById("search-lot").addEventListener("keypress", function(e){
         if (e.key !== "Enter") return;
-
-        let val = this.value.trim();
+        const val = this.value.trim();
         if (!val) return;
 
         fetch(`/gis-map/search?lot_number=${val}`)
             .then(res => res.json())
             .then(data => {
+                data.features.forEach(f => {
+                    if (!f.properties.ActualUse) f.properties.ActualUse = null;
+                });
 
-                geojsonLayer.clearLayers();
+                parcelLayer.clearLayers();
+                parcelLayer.addData(data);
 
-                if (data.features.length === 0) {
-                    Swal.fire("Error", "Lot not found or no access", "error");
-                    return;
-                }
-
-                geojsonLayer.addData(data);
-                let lyr = geojsonLayer.getLayers()[0];
-
-                map.fitBounds(lyr.getBounds());
-                lyr.openPopup();
-
+                const group = L.featureGroup();
+                parcelLayer.eachLayer(l => group.addLayer(l));
+                map.fitBounds(group.getBounds(), { padding: [40,40] });
             });
     });
 

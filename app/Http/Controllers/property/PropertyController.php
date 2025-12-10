@@ -35,7 +35,6 @@ class PropertyController extends Controller
       $countReview = Property::where('status', '=', 'Under Review')->count();
       $countComplete = Property::where('status', '=', 'Complete')->count();
 
-
       $properties = Property::leftjoin('assessment', 'properties.id', '=', 'assessment.properties_id')
                             ->leftjoin('assessor', 'assessment.assessor_id', '=', 'assessor.id')
                             ->leftjoin('property_type', 'assessment.property_type', '=', 'property_type.id')
@@ -78,7 +77,8 @@ class PropertyController extends Controller
 
         // Lazy search
         if ($search) {
-            $query->where('properties.lot_number', 'LIKE', "%{$search}%");
+            $query->where('properties.lot_number', 'LIKE', "%{$search}%")
+                  ->orWhere('properties.owner', 'like', "%{$search}%");
         }
 
         $properties = $query
@@ -131,7 +131,7 @@ class PropertyController extends Controller
 
     }
     public function update(Request $request){
-      $property = Property::where('id', Crypt::decryptString($request->id))->update([
+      $property = Property::where('id', $request->id)->update([
         'owner' => $request->owner,
         'lot_number' => $request->lot_number,
         'address' => $request->address,

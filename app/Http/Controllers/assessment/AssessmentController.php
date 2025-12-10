@@ -198,7 +198,7 @@ class AssessmentController extends Controller
   }
   public function viewPdf($id)
   {
-    $OIC_Municilap_Assessor = Assessor::where('role', '=', 'OIC Municilap Assessor')
+    $OIC_Municilap_Assessor = Assessor::where('role', '=', 'OIC Municipal Assessor')
                                 ->whereNull('deleted_at')
                                 ->selectRaw("CONCAT(assessor.firstname, ' ', assessor.middlename, ' ', assessor.lastname) as fullname")
                                 ->first();
@@ -300,7 +300,8 @@ class AssessmentController extends Controller
 
 
       if ($search) {
-            $query->where('properties.lot_number', 'LIKE', "%{$search}%");
+          $query->where('properties.lot_number', 'LIKE', "%{$search}%")
+                ->orWhere('properties.owner', 'like', "%{$search}%");
       }
 
       if ($status) {
@@ -395,7 +396,7 @@ class AssessmentController extends Controller
   }
   public function buildingPDF($id)
   {
-    $OIC_Municilap_Assessor = Assessor::where('role', '=', 'OIC Municilap Assessor')
+    $OIC_Municilap_Assessor = Assessor::where('role', '=', 'OIC Municipal Assessor')
                                 ->selectRaw("CONCAT(assessor.firstname, ' ', assessor.middlename, ' ', assessor.lastname) as fullname")
                                 ->first();
     $Technical_Supervisor = Assessor::where('role', '=', 'Technical Supervisor')

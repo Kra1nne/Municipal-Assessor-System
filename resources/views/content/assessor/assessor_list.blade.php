@@ -78,7 +78,7 @@
               <select class="form-select" id="role" name="role" aria-label="Default select example">
                 <option value="" selected disabled>Select Position</option>
                 <option value="Assessor">Assessor</option>
-                <option value="OIC Municilap Assessor">OIC Municilap Assessor</option>
+                <option value="OIC Municipal Assessor">OIC Municipal Assessor</option>
                 <option value="Technical Supervisor">Technical Supervisor</option>
                 <option value="Assessment Clerk 1">Assessment Clerk 1</option>
               </select>
@@ -140,7 +140,7 @@
               <select class="form-select" id="Edit_role" name="role" aria-label="Default select example">
                 <option value="" selected disabled>Select Position</option>
                 <option value="Assessor">Assessor</option>
-                <option value="OIC Municilap Assessor">OIC Municilap Assessor</option>
+                <option value="OIC Municipal Assessor">OIC Municipal Assessor</option>
                 <option value="Technical Supervisor">Technical Supervisor</option>
                 <option value="Assessment Clerk 1">Assessment Clerk 1</option>
               </select>

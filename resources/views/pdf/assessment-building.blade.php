@@ -283,90 +283,90 @@ $assessment_value = $market_value * ($properties->percentage / 100);
     <td>Reinforced Concrete</td>
     <td><?= $properties->roof == "Reinforced Concrete"? 'x' : ''?></td>
     <td>Reinforced Concrete</td>
-    <td><?= $properties->flooring == "Reinforced Concrete"? 'x' : ''?></td>
-    <td><?= $properties->flooring == "Reinforced Concrete"? 'x' : ''?></td>
-    <td><?= $properties->flooring == "Reinforced Concrete"? 'x' : ''?></td>
-    <td><?= $properties->flooring == "Reinforced Concrete"? 'x' : ''?></td>
+    <td><?= $properties->flooring == "Reinforced Concrete" && $properties->storey >= 1 ? 'x' : ''?></td>
+    <td><?= $properties->flooring == "Reinforced Concrete" && $properties->storey >= 2 ? 'x' : ''?></td>
+    <td><?= $properties->flooring == "Reinforced Concrete" && $properties->storey >= 3 ? 'x' : ''?></td>
+    <td><?= $properties->flooring == "Reinforced Concrete" && $properties->storey >= 4 ? 'x' : ''?></td>
     <td>Reinforced Concrete</td>
-    <td><?= $properties->walls == "Reinforced Concrete"? 'x' : ''?></td>
-    <td><?= $properties->walls == "Reinforced Concrete"? 'x' : ''?></td>
-    <td><?= $properties->walls == "Reinforced Concrete"? 'x' : ''?></td>
-    <td><?= $properties->walls == "Reinforced Concrete"? 'x' : ''?></td>
+    <td><?= $properties->walls == "Reinforced Concrete" && $properties->storey >= 1 ? 'x' : ''?></td>
+    <td><?= $properties->walls == "Reinforced Concrete" && $properties->storey >= 2 ? 'x' : ''?></td>
+    <td><?= $properties->walls == "Reinforced Concrete" && $properties->storey >= 3 ? 'x' : ''?></td>
+    <td><?= $properties->walls == "Reinforced Concrete" && $properties->storey >= 4 ? 'x' : ''?></td>
   </tr>
 
   <tr>
     <td>Tiles</td>
     <td><?= $properties->roof == "Tiles"? 'x' : ''?></td>
     <td>Plain Cement</td>
-    <td><?= $properties->flooring == "Plain Cement"? 'x' : ''?></td>
-    <td><?= $properties->flooring == "Plain Cement"? 'x' : ''?></td>
-    <td><?= $properties->flooring == "Plain Cement"? 'x' : ''?></td>
-    <td><?= $properties->flooring == "Plain Cement"? 'x' : ''?></td>
+    <td><?= $properties->flooring == "Plain Cement" && $properties->storey >= 1 ? 'x' : ''?></td>
+    <td><?= $properties->flooring == "Plain Cement" && $properties->storey >= 2 ? 'x' : ''?></td>
+    <td><?= $properties->flooring == "Plain Cement" && $properties->storey >= 3 ? 'x' : ''?></td>
+    <td><?= $properties->flooring == "Plain Cement" && $properties->storey >= 4 ? 'x' : ''?></td>
     <td>Plain Cement</td>
-    <td><?= $properties->walls == "Plain Cement"? 'x' : ''?></td>
-    <td><?= $properties->walls == "Plain Cement"? 'x' : ''?></td>
-    <td><?= $properties->walls == "Plain Cement"? 'x' : ''?></td>
-    <td><?= $properties->walls == "Plain Cement"? 'x' : ''?></td>
+    <td><?= $properties->walls == "Plain Cement" && $properties->storey >= 1 ? 'x' : ''?></td>
+    <td><?= $properties->walls == "Plain Cement" && $properties->storey >= 2 ? 'x' : ''?></td>
+    <td><?= $properties->walls == "Plain Cement" && $properties->storey >= 3 ? 'x' : ''?></td>
+    <td><?= $properties->walls == "Plain Cement" && $properties->storey >= 4 ? 'x' : ''?></td>
   </tr>
 
   <tr>
     <td>G.I. Sheet</td>
     <td><?= $properties->roof == "G.I. Sheet"? 'x' : ''?></td>
     <td>Marble</td>
-    <td><?= $properties->flooring == "Marble"? 'x' : ''?></td>
-    <td><?= $properties->flooring == "Marble"? 'x' : ''?></td>
-    <td><?= $properties->flooring == "Marble"? 'x' : ''?></td>
-    <td><?= $properties->flooring == "Marble"? 'x' : ''?></td>
+    <td><?= $properties->flooring == "Marble" && $properties->storey >= 1 ? 'x' : ''?></td>
+    <td><?= $properties->flooring == "Marble" && $properties->storey >= 2 ? 'x' : ''?></td>
+    <td><?= $properties->flooring == "Marble" && $properties->storey >= 3 ? 'x' : ''?></td>
+    <td><?= $properties->flooring == "Marble" && $properties->storey >= 4 ? 'x' : ''?></td>
     <td>Wood</td>
-    <td><?= $properties->walls == "Wood"? 'x' : ''?></td>
-    <td><?= $properties->walls == "Wood"? 'x' : ''?></td>
-    <td><?= $properties->walls == "Wood"? 'x' : ''?></td>
-    <td><?= $properties->walls == "Wood"? 'x' : ''?></td>
+    <td><?= $properties->walls == "Wood" && $properties->storey >= 1 ? 'x' : ''?></td>
+    <td><?= $properties->walls == "Wood" && $properties->storey >= 2 ? 'x' : ''?></td>
+    <td><?= $properties->walls == "Wood" && $properties->storey >= 3 ? 'x' : ''?></td>
+    <td><?= $properties->walls == "Wood" && $properties->storey >= 4 ? 'x' : ''?></td>
   </tr>
 
   <tr>
     <td>Aluminum</td>
     <td><?= $properties->roof == "Aluminum"? 'x' : ''?></td>
     <td>Wood</td>
-    <td><?= $properties->flooring == "Wood"? 'x' : ''?></td>
-    <td><?= $properties->flooring == "Wood"? 'x' : ''?></td>
-    <td><?= $properties->flooring == "Wood"? 'x' : ''?></td>
-    <td><?= $properties->flooring == "Wood"? 'x' : ''?></td>
+    <td><?= $properties->flooring == "Wood" && $properties->storey >= 1 ? 'x' : ''?></td>
+    <td><?= $properties->flooring == "Wood" && $properties->storey >= 2 ? 'x' : ''?></td>
+    <td><?= $properties->flooring == "Wood" && $properties->storey >= 3 ? 'x' : ''?></td>
+    <td><?= $properties->flooring == "Wood" && $properties->storey >= 4 ? 'x' : ''?></td>
     <td>CHB</td>
-    <td><?= $properties->walls == "CHB"? 'x' : ''?></td>
-    <td><?= $properties->walls == "CHB"? 'x' : ''?></td>
-    <td><?= $properties->walls == "CHB"? 'x' : ''?></td>
-    <td><?= $properties->walls == "CHB"? 'x' : ''?></td>
+    <td><?= $properties->walls == "CHB" && $properties->storey >= 1 ? 'x' : ''?></td>
+    <td><?= $properties->walls == "CHB" && $properties->storey >= 2 ? 'x' : ''?></td>
+    <td><?= $properties->walls == "CHB" && $properties->storey >= 3 ? 'x' : ''?></td>
+    <td><?= $properties->walls == "CHB" && $properties->storey >= 4 ? 'x' : ''?></td>
   </tr>
 
   <tr>
     <td >Asbestos</td>
     <td><?= $properties->roof == "Asbestos"? 'x' : ''?></td>
     <td>Tiles</td>
-    <td><?= $properties->flooring == "Tiles"? 'x' : ''?></td>
-    <td><?= $properties->flooring == "Tiles"? 'x' : ''?></td>
-    <td><?= $properties->flooring == "Tiles"? 'x' : ''?></td>
-    <td><?= $properties->flooring == "Tiles"? 'x' : ''?></td>
+    <td><?= $properties->flooring == "Tiles" && $properties->storey >= 1 ? 'x' : ''?></td>
+    <td><?= $properties->flooring == "Tiles" && $properties->storey >= 2 ? 'x' : ''?></td>
+    <td><?= $properties->flooring == "Tiles" && $properties->storey >= 3 ? 'x' : ''?></td>
+    <td><?= $properties->flooring == "Tiles" && $properties->storey >= 4 ? 'x' : ''?></td>
     <td>G.I. Sheet</td>
-    <td><?= $properties->walls == "G.I. Sheet"? 'x' : ''?></td>
-    <td><?= $properties->walls == "G.I. Sheet"? 'x' : ''?></td>
-    <td><?= $properties->walls == "G.I. Sheet"? 'x' : ''?></td>
-    <td><?= $properties->walls == "G.I. Sheet"? 'x' : ''?></td>
+    <td><?= $properties->walls == "G.I. Sheet" && $properties->storey >= 1 ? 'x' : ''?></td>
+    <td><?= $properties->walls == "G.I. Sheet" && $properties->storey >= 2 ? 'x' : ''?></td>
+    <td><?= $properties->walls == "G.I. Sheet" && $properties->storey >= 3 ? 'x' : ''?></td>
+    <td><?= $properties->walls == "G.I. Sheet" && $properties->storey >= 4 ? 'x' : ''?></td>
   </tr>
 
   <tr>
     <td >Long Span</td>
     <td><?= $properties->roof == "Long Span"? 'x' : ''?></td>
     <td>Others (Specify)</td>
-    <td><?= $properties->flooring == "Others"? 'x' : ''?></td>
-    <td><?= $properties->flooring == "Others"? 'x' : ''?></td>
-    <td><?= $properties->flooring == "Others"? 'x' : ''?></td>
-    <td><?= $properties->flooring == "Others"? 'x' : ''?></td>
+    <td><?= $properties->flooring == "Others" && $properties->storey >= 1 ? 'x' : ''?></td>
+    <td><?= $properties->flooring == "Others" && $properties->storey >= 2 ? 'x' : ''?></td>
+    <td><?= $properties->flooring == "Others" && $properties->storey >= 3 ? 'x' : ''?></td>
+    <td><?= $properties->flooring == "Others" && $properties->storey >= 4 ? 'x' : ''?></td>
     <td>Build-a-wall</td>
-    <td><?= $properties->walls == "Build-a-wall"? 'x' : ''?></td>
-    <td><?= $properties->walls == "Build-a-wall"? 'x' : ''?></td>
-    <td><?= $properties->walls == "Build-a-wall"? 'x' : ''?></td>
-    <td><?= $properties->walls == "Build-a-wall"? 'x' : ''?></td>
+    <td><?= $properties->walls == "Build-a-wall" && $properties->storey >= 1 ? 'x' : ''?></td>
+    <td><?= $properties->walls == "Build-a-wall" && $properties->storey >= 2 ? 'x' : ''?></td>
+    <td><?= $properties->walls == "Build-a-wall" && $properties->storey >= 3 ? 'x' : ''?></td>
+    <td><?= $properties->walls == "Build-a-wall" && $properties->storey >= 4 ? 'x' : ''?></td>
   </tr>
 
   <tr>
@@ -378,10 +378,10 @@ $assessment_value = $market_value * ($properties->percentage / 100);
     <td></td>
     <td></td>
     <td>Sawali</td>
-    <td><?= $properties->walls == "Sawali"? 'x' : ''?></td>
-    <td><?= $properties->walls == "Sawali"? 'x' : ''?></td>
-    <td><?= $properties->walls == "Sawali"? 'x' : ''?></td>
-    <td><?= $properties->walls == "Sawali"? 'x' : ''?></td>
+    <td><?= $properties->walls == "Sawali" && $properties->storey >= 1 ? 'x' : ''?></td>
+    <td><?= $properties->walls == "Sawali" && $properties->storey >= 2 ? 'x' : ''?></td>
+    <td><?= $properties->walls == "Sawali" && $properties->storey >= 3 ? 'x' : ''?></td>
+    <td><?= $properties->walls == "Sawali" && $properties->storey >= 4 ? 'x' : ''?></td>
   </tr>
 
   <tr>
@@ -393,10 +393,10 @@ $assessment_value = $market_value * ($properties->percentage / 100);
     <td></td>
     <td></td>
     <td>Bamboo</td>
-    <td><?= $properties->walls == "Bamboo"? 'x' : ''?></td>
-    <td><?= $properties->walls == "Bamboo"? 'x' : ''?></td>
-    <td><?= $properties->walls == "Bamboo"? 'x' : ''?></td>
-    <td><?= $properties->walls == "Bamboo"? 'x' : ''?></td>
+    <td><?= $properties->walls == "Bamboo" && $properties->storey >= 1 ? 'x' : ''?></td>
+    <td><?= $properties->walls == "Bamboo" && $properties->storey >= 2 ? 'x' : ''?></td>
+    <td><?= $properties->walls == "Bamboo" && $properties->storey >= 3 ? 'x' : ''?></td>
+    <td><?= $properties->walls == "Bamboo" && $properties->storey >= 4 ? 'x' : ''?></td>
   </tr>
 
   <tr>
@@ -408,10 +408,10 @@ $assessment_value = $market_value * ($properties->percentage / 100);
     <td></td>
     <td></td>
     <td>Others (Specify)</td>
-    <td><?= $properties->walls == "Others"? 'x' : ''?></td>
-    <td><?= $properties->walls == "Others"? 'x' : ''?></td>
-    <td><?= $properties->walls == "Others"? 'x' : ''?></td>
-    <td><?= $properties->walls == "Others"? 'x' : ''?></td>
+    <td><?= $properties->walls == "Others" && $properties->storey >= 1 ? 'x' : ''?></td>
+    <td><?= $properties->walls == "Others" && $properties->storey >= 2 ? 'x' : ''?></td>
+    <td><?= $properties->walls == "Others" && $properties->storey >= 3 ? 'x' : ''?></td>
+    <td><?= $properties->walls == "Others" && $properties->storey >= 4 ? 'x' : ''?></td>
   </tr>
   <tr>
     <td >Others (Specify)</td>
@@ -534,7 +534,7 @@ $assessment_value = $market_value * ($properties->percentage / 100);
   </tr>
   <tr>
     <td style="border:none;" class="text-center">Assessment Clerk 1</td>
-    <td style="border:none;" class="text-center">OIC Municilap Assessor</td>
+    <td style="border:none;" class="text-center">OIC Municipal Assessor</td>
     <td style="border:none;" class="text-center">Technical Supervisor</td>
   </tr>
 </table>

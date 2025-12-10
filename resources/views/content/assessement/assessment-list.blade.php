@@ -28,7 +28,7 @@
       <div class="card-body d-flex justify-content-between align-items-center">
         <div class="py-5">
           <p class="text-muted mb-3 fw-bolder">Assessement Complete</p>
-          <h3 class="fw-bold mb-3" id="completeAssessment">{{ $countReview }}</h3>
+          <h3 class="fw-bold mb-3" id="completeAssessment">{{ $countComplete }}</h3>
           <small class="text-success">Assessments completed</small>
         </div>
         <div class="text-success fs-2">
@@ -43,7 +43,7 @@
       <div class="card-body d-flex justify-content-between align-items-center">
         <div class="py-5">
           <p class="text-muted mb-3 fw-bolder">Under Review Assessment</p>
-          <h3 class="fw-bold mb-3" id="reviewAssessment">{{ $countComplete }}</h3>
+          <h3 class="fw-bold mb-3" id="reviewAssessment">{{ $countReview }}</h3>
           <small class="text-muted">Under review assessments</small>
         </div>
         <div class="text-muted fs-2">
@@ -73,7 +73,7 @@
     <div class="navbar-nav align-items-start">
       <div class="nav-item d-flex align-items-center">
         <i class="ri-search-line ri-22px me-1_5"></i>
-        <input type="search" id="search" class="form-control border-0 shadow-none ps-1 ps-sm-2 ms-50" placeholder="Search land number..." aria-label="Search...">
+        <input type="search" id="search" class="form-control border-0 shadow-none ps-1 ps-sm-2 ms-50" placeholder="Search here..." aria-label="Search...">
       </div>
     </div>
     <div class="navbar-nav flex-row align-items-center ms-auto gap-5">
