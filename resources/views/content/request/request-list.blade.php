@@ -13,7 +13,7 @@
       <div class="card-body d-flex justify-content-between align-items-center">
         <div class="py-5">
           <p class="text-muted mb-5 fw-bolder">Total Request</p>
-          <h3 class="fw-bold mb-5" id="totalRequest"></h3>
+          <h3 class="fw-bold mb-5" id="totalRequest">0</h3>
           <small class="text-primary">All request records</small>
         </div>
         <div class="text-primary fs-2">
@@ -28,7 +28,7 @@
       <div class="card-body d-flex justify-content-between align-items-center">
         <div class="py-5">
           <p class="text-muted mb-5 fw-bolder">Request Complete</p>
-          <h3 class="fw-bold mb-5" id="completeRequest"></h3>
+          <h3 class="fw-bold mb-5" id="completeRequest">0</h3>
           <small class="text-success">Request completed</small>
         </div>
         <div class="text-success fs-2">
@@ -43,7 +43,7 @@
       <div class="card-body d-flex justify-content-between align-items-center">
         <div class="py-5">
           <p class="text-muted mb-5 fw-bolder">Under Review Request</p>
-          <h3 class="fw-bold mb-5" id="reviewRequest"></h3>
+          <h3 class="fw-bold mb-5" id="reviewRequest">0</h3>
           <small class="text-muted">Under review request</small>
         </div>
         <div class="text-muted fs-2">
@@ -58,7 +58,7 @@
       <div class="card-body d-flex justify-content-between align-items-center">
         <div class="py-5">
           <p class="text-muted mb-5 fw-bolder">Decline Request</p>
-          <h3 class="fw-bold text-danger mb-5" id="declineRequest"></h3>
+          <h3 class="fw-bold text-danger mb-5" id="declineRequest">0</h3>
           <small class="text-muted">Decline Request</small>
         </div>
         <div class="text-success fs-2">
