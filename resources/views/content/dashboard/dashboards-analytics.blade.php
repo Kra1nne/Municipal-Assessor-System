@@ -3,6 +3,28 @@
 @section('title', 'Dashboard - Analytics')
 
 @section('content')
+<div class="row mb-4">
+  <div class="col-12">
+  <div class="card shadow-sm">
+    <div class="card-body p-4">
+
+      <!-- HEADER -->
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h2 id="clock" class="fw-bold mb-0"></h2>
+          <small id="date" class="text-muted"></small>
+        </div>
+
+        <div class="text-end">
+          <i id="weather-icon" class="fs-2"></i>
+          <div class="fw-semibold" id="weather-temp">--°C</div>
+          <small class="text-muted">Today</small>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
 @if(Auth::user()->role == "Admin" || Auth::user()->role == "Employee")
 <div class="row gy-6">
   <div class="col-xl-3 col-md-6">
@@ -66,76 +88,17 @@
     <div class="card h-100 shadow-sm">
       <div class="card-body d-flex justify-content-between align-items-center">
         <div class="py-5">
-          <p class="text-muted mb-2 fw-bolder">System Health</p>
-          <h3 class="fw-bold text-success mb-0">Healthy</h3>
-          <small class="text-muted">All services operational</small>
+          <p class="text-muted mb-2 fw-bolder">Total Request</p>
+          <h3 class="fw-bold mb-0" id="totalRequest">0</h3>
+          <small class="text-primary">All request records</small>
         </div>
-        <div class="text-success fs-2">
-          <i class="ri-checkbox-circle-line" style="font-size: 2.8rem;"></i>
-        </div>
+        <div class="text-primary fs-2">
+          <i class="ri-file-line" style="font-size: 2.8rem;"></i>
+        </div>  
       </div>
     </div>
   </div>
 
-
-
-  <!-- Data Tables -->
-  <div class="col-12">
-    <div class="card overflow-hidden">
-      <div class="table-responsive">
-        <table class="table table-sm">
-          <thead>
-            <tr>
-              <th class="text-truncate">User</th>
-              <th class="text-truncate">Action</th>
-              <th class="text-truncate">Table</th>
-              <th class="text-truncate">Timestamp</th>
-              <th class="text-truncate">Role</th>
-              <th class="text-truncate">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            @foreach ($log as $item)
-            <tr>
-              <td>
-                <div class="d-flex align-items-center">
-                  <div class="avatar avatar-sm me-4">
-                    <img src="{{asset('assets/img/avatars/1.png')}}" alt="Avatar" class="rounded-circle">
-                  </div>
-                  <div>
-                    <h6 class="mb-0 text-truncate">{{ $item->firstname }}</h6>
-                    <small class="text-trunpate">{{ $item->email}}</small>
-                  </div>
-                </div>
-              </td>
-              <td class="text-truncate">{{ $item->action }}</td>
-              <td class="text-truncate">{{ $item->table_name }}</td>
-              <td class="text-truncate">{{ date('M. d, Y - h:m A', strtotime($item->created_at)) }}</td>
-              <td class="text-truncate">
-                <div class="d-flex align-items-center">
-                  @if ($item->role == "Admin")
-                      <i class="ri-vip-crown-line ri-22px text-primary me-2"></i>
-                      <span>Admin</span>
-                  @endif
-                  @if ($item->role == "Employee")
-                      <i class="ri-briefcase-line ri-22px text-info me-2"></i>
-                      <span>Employee</span>
-                  @endif
-                  @if ($item->role == "User")
-                      <i class="ri-user-3-line ri-22px text-success me-2"></i>
-                      <span>User</span>
-                  @endif
-                </div>
-              </td>
-              <td><span class="badge bg-label-success rounded-pill">Success</span></td>
-            </tr>
-            @endforeach
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-  <!--/ Data Tables -->
 </div>
 @endif
 @if(Auth::user()->role == "User")
@@ -199,47 +162,128 @@
       </div>
     </div>
   </div>
-  <div class="col-12">
-    <div class="card overflow-hidden">
-      <div class="table-responsive">
-        <table class="table table-sm">
-          <thead>
-            <tr>
-              <th class="text-truncate">Parcel ID</th>
-              <th class="text-truncate">Lot Number</th>
-              <th class="text-truncate">Address</th>
-              <th class="text-truncate">Type</th>
-              <th class="text-truncate">Area</th>
-              <th class="text-truncate">Coordinates</th>
-              <th class="text-truncate">Assessement Value</th>
-              <th class="text-truncate">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            @foreach ($properties as $item)
-            <tr>
-              <td>{{ $item->parcel_id ?? "" }}</td>
-              <td>
-                {{ $item->lot_number ?? "" }}
-              </td>
-              <td class="text-truncate">{{ $item->address }}</td>
-              <td class="text-truncate">{{ $item->name }}</td>
-              <td class="text-truncate">{{ $item->area }} sq. m</td>
-              <td class="text-truncate">
-                <div>{{ $item->longitude}}&deg; E</div>
-                <div>{{$item->longitude}}&deg; N</div>
-              </td>
-              <td>₱ {{ number_format($item->area * $item->value *  ($item->assessment_rate / 100), 2)}}</td>
-              <td>
-                <a href="{{ route('myproperty', $item->encrypted)}}" class="btn btn-success" target="_blank">View</a>
-              </td>
-            </tr>
-            @endforeach
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
 </div>
 @endif
+
+
+</div>
 @endsection
+<script>
+function updateClock() {
+  const now = new Date();
+
+  document.getElementById("clock").innerHTML =
+    now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+  document.getElementById("date").innerHTML =
+    now.toLocaleDateString(undefined, {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+}
+
+setInterval(updateClock, 1000);
+updateClock();
+</script>
+<script>
+navigator.geolocation.getCurrentPosition(pos => {
+  const { latitude, longitude } = pos.coords;
+
+  fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&daily=temperature_2m_max&timezone=auto`)
+    .then(res => res.json())
+    .then(data => {
+
+      document.getElementById("weather-temp").innerHTML =
+        data.current_weather.temperature + "°C";
+
+      const days = data.daily.time;
+      const temps = data.daily.temperature_2m_max;
+
+      for (let i = 1; i <= 6; i++) {
+        const date = new Date(days[i]);
+        document.getElementById(`day${i}-name`).innerHTML =
+          date.toLocaleDateString(undefined, { weekday: 'short' });
+        document.getElementById(`day${i}-temp`).innerHTML =
+          temps[i] + "°C";
+      }
+    });
+});
+</script>
+<script>
+navigator.geolocation.getCurrentPosition(pos => {
+  const { latitude, longitude } = pos.coords;
+
+  fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&daily=temperature_2m_max&timezone=auto`)
+    .then(res => res.json())
+    .then(data => {
+
+      // Temperature
+      document.getElementById("weather-temp").innerHTML =
+        data.current_weather.temperature + "°C";
+
+      // Weather code
+      const code = data.current_weather.weathercode;
+      const icon = document.getElementById("weather-icon");
+
+      // Default
+      icon.className = "ri-sun-line fs-2 text-warning";
+
+      // Weather code mapping
+      if ([1, 2].includes(code)) {
+        icon.className = "ri-cloudy-line fs-2 text-secondary"; // Partly cloudy
+      } else if (code === 3) {
+        icon.className = "ri-cloud-line fs-2 text-secondary"; // Cloudy
+      } else if ([45, 48].includes(code)) {
+        icon.className = "ri-mist-line fs-2 text-muted"; // Fog
+      } else if ([51, 53, 55, 61, 63, 65].includes(code)) {
+        icon.className = "ri-rainy-line fs-2 text-primary"; // Rain
+      } else if ([71, 73, 75].includes(code)) {
+        icon.className = "ri-snowy-line fs-2 text-info"; // Snow
+      } else if ([95, 96, 99].includes(code)) {
+        icon.className = "ri-thunderstorms-line fs-2 text-danger"; // Thunderstorm
+      }
+    });
+});
+</script>
+<script>
+navigator.geolocation.getCurrentPosition(pos => {
+  const { latitude, longitude } = pos.coords;
+
+  fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&daily=temperature_2m_max,weathercode&timezone=auto`)
+    .then(res => res.json())
+    .then(data => {
+
+      // Current day
+      document.getElementById("weather-temp").innerHTML =
+        data.current_weather.temperature + "°C";
+
+      const days = data.daily.time;
+      const temps = data.daily.temperature_2m_max;
+      const codes = data.daily.weathercode;
+
+      function getWeatherIcon(code) {
+        if ([0].includes(code)) return "ri-sun-line text-warning"; // Sunny
+        if ([1,2].includes(code)) return "ri-cloudy-line text-secondary"; // Partly cloudy
+        if (code === 3) return "ri-cloud-line text-secondary"; // Cloudy
+        if ([45,48].includes(code)) return "ri-mist-line text-muted"; // Fog
+        if ([51,53,55,61,63,65].includes(code)) return "ri-rainy-line text-primary"; // Rain
+        if ([71,73,75].includes(code)) return "ri-snowy-line text-info"; // Snow
+        if ([95,96,99].includes(code)) return "ri-thunderstorms-line text-danger"; // Thunderstorm
+        return "ri-sun-line text-warning"; // Default
+      }
+
+      for (let i = 1; i <= 6; i++) {
+        const date = new Date(days[i]);
+        document.getElementById(`day${i}-name`).innerHTML =
+          date.toLocaleDateString(undefined, { weekday: 'short' });
+        document.getElementById(`day${i}-temp`).innerHTML =
+          temps[i] + "°C";
+
+        const iconEl = document.getElementById(`day${i}-icon`);
+        iconEl.className = `fs-5 ${getWeatherIcon(codes[i])}`;
+      }
+    });
+});
+</script>

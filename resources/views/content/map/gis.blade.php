@@ -72,15 +72,32 @@
     </header>
 
     <main>
-        <input
-            type="text"
-            id="search-lot"
-            placeholder="Search parcel or owner..."
-            class="form-control form-control-sm mb-2"
-            style="width: 500px;"
-        >
-
+        <div class="d-flex align-items-end">
+             <div class="mb-3 ms-auto">
+                <div class="d-flex align-items-center gap-2">
+                <button id="open-qgis-btn" title="Download QGIS Project" aria-label="Download QGIS Project" class="btn btn-primary w-100 w-md-auto">
+                    Download
+                </button>
+                <button class="btn btn-outline-secondary w-100 w-md-auto" title="View QGIS Project Documentation" aria-label="View QGIS Project Documentation">
+                    Documentation
+                </button>
+                </div>
+            </div>
+        </div>
         <div class="card">
+            <div class="mb-3 d-flex flex-column flex-md-row align-items-start align-items-md-center px-3 mt-3 gap-3">
+                <div class="align-items-start flex-grow-1 w-100">
+                    <div class="nav-item d-flex align-items-center">
+                        <i class="ri-search-line ri-22px me-1_5"></i>
+                        <input
+                            type="text"
+                            id="search-lot"
+                            placeholder="Search parcel or owner..."
+                            class="form-control border-0 shadow-none ps-1 ps-sm-2 ms-50"
+                        >
+                    </div>
+                </div>
+            </div>
             <div id="map" style="height: 700px; width: 100%; position: relative;"></div>
         </div>
     </main>
@@ -234,6 +251,37 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     });
 
+    const params = new URLSearchParams(window.location.search);
+    const lotFromUrl = params.get("lot_number");
+
+    if (lotFromUrl) {
+        const searchInput = document.getElementById("search-lot");
+        searchInput.value = lotFromUrl;
+        searchAndZoom(lotFromUrl);
+    }
+
+    function searchAndZoom(val) {
+        fetch(`/gis-map/search?lot_number=${encodeURIComponent(val)}`)
+            .then(res => res.json())
+            .then(data => {
+                if (!data.features || data.features.length === 0) {
+                    console.warn("No parcel found");
+                    return;
+                }
+
+                parcelLayer.clearLayers();
+                parcelLayer.addData(data);
+
+                const group = L.featureGroup();
+                parcelLayer.eachLayer(layer => {
+                    group.addLayer(layer);
+                    layer.openPopup();
+                });
+
+                map.fitBounds(group.getBounds(), { padding: [40, 40] });
+            })
+            .catch(err => console.error(err));
+    }
 });
 </script>
 

@@ -77,11 +77,11 @@
         <input type="search" id="search" class="form-control border-0 shadow-none ps-1 ps-sm-2 ms-50" placeholder="Search here..." aria-label="Search...">
       </div>
     </div>
-    <!-- <div class="navbar-nav flex-row align-items-center ms-auto gap-5">
+    <div class="navbar-nav flex-row align-items-center ms-auto gap-5">
       <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#AddAccount">
         <span class="tf-icons ri-add-circle-line ri-16px me-1_5"></span>Add
       </button>
-    </div> -->
+    </div> 
   </div>
   <div class="table-responsive text-nowrap overflow-auto" style="max-height: 500px;">
     <table class="table table-hover">
@@ -120,6 +120,10 @@
 
           <form id="ProperyData" class="mb-3">
             @csrf
+            <div class="form-floating form-floating-outline mb-3">
+              <input type="text" class="form-control" id="parcel_id" name="parcel_id" placeholder="Enter parcel ID" autofocus>
+              <label for="parcel_id">Parcel ID</label>
+            </div>
             <div class="form-floating form-floating-outline mb-3">
               <input type="text" class="form-control" id="owner" name="owner" placeholder="Enter property owner" autofocus>
               <label for="owner">Owner</label>

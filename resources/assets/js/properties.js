@@ -66,6 +66,7 @@ $(document).ready(function () {
   $('#AddAccountBtn').on('click', function (event) {
     const fields = [
       { id: 'owner', label: 'Owner Name' },
+      { id: 'parcel_id', label: 'Parcel ID' },
       { id: 'lot_number', label: 'Lot Number' },
       { id: 'address', label: 'Address' },
       { id: 'type', label: 'Type' },
@@ -200,6 +201,10 @@ $(document).ready(function () {
 
                             <a class="dropdown-item DeleteBtn" data-id="${property.property_id}">
                                 <i class="ri-delete-bin-6-line me-1"></i>Delete
+                            </a>
+                            <a class="dropdown-item"
+                              href="/gis-map?lot_number=${encodeURIComponent(property.lot_number)}">
+                                <i class="ri-eye-line me-1"></i>View
                             </a>
                         </div>
                     </div>

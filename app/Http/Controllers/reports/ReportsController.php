@@ -24,7 +24,8 @@ class ReportsController extends Controller
           ->leftjoin('building', 'building.assessment_id', '=','assessment.id')
           ->leftjoin('building_type', 'building.building_type', '=', 'building_type.id')
           ->whereNull('assessment.deleted_at')
-          ->whereBetween('assessment.created_at', [$start, $end]);
+          ->whereBetween('assessment.created_at', [$start, $end])
+          ->orderBy('properties.owner', 'asc');
 
       if ($request->value == "market_value") {
 

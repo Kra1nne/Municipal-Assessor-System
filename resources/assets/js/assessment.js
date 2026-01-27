@@ -140,7 +140,7 @@ $(document).ready(function () {
                               <a href="/assessments/pdf/${property.property_id}"
                                 target="_blank"
                                 class="dropdown-item assess">
-                                  View
+                                  <i class="ri-eye-line me-1"></i>View
                               </a>
 
                               <a class="dropdown-item EditBtn"
@@ -163,7 +163,11 @@ $(document).ready(function () {
                                   data-istaxable="${property.istaxable}"
                                   data-survey_no="${property.survey_no}">
 
-                                  <i class="ri-pencil-lines me-1"></i> Edit
+                                  <i class="ri-pencil-line me-1"></i> Edit
+                              </a>
+                              <a class="dropdown-item"
+                                href="/gis-map?lot_number=${encodeURIComponent(property.lot_number)}">
+                                  <i class="ri-map-pin-line me-1"></i>Map
                               </a>
                           </div>
                       </div>
@@ -179,7 +183,11 @@ $(document).ready(function () {
                                 data-bs-toggle="modal"
                                 data-bs-target="#assessmentModal"
                                 data-property-id="${property.property_id}">
-                                  Assess
+                                  <i class="ri-pencil-line me-1"></i>Assess
+                              </a>
+                              <a class="dropdown-item"
+                                href="/gis-map?lot_number=${encodeURIComponent(property.lot_number)}">
+                                  <i class="ri-map-pin-line me-1"></i>Map
                               </a>
                           </div>
                       </div>

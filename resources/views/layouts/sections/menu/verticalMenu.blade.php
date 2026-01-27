@@ -3,24 +3,19 @@
   <!-- ! Hide app brand if navbar-full -->
   <div class="app-brand mb-3 d-flex align-items-center justify-content-center">
     <a href="{{url('/')}}" class="app-brand-link">
-      <span class="app-brand-logo demo me-1 mt-5">
-        @include('_partials.macros',["height"=>60])
-      </span>
+          <span class="app-brand-logo demo me-1 mt-5">
+            @include('_partials.macros',["height"=>60])
+          </span>
+        </a>
+
+        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large position-absolute top-0 end-0 m-2">
+      <i class="menu-toggle-icon d-xl-block align-middle"></i>
     </a>
-
-    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large position-absolute top-0 end-0 m-2">
-  <i class="menu-toggle-icon d-xl-block align-middle"></i>
-</a>
   </div>
-
-  <div class="menu-inner-shadow"></div>
 
   <ul class="menu-inner py-1">
     @foreach ($menuData[0]->menu as $menu)
 
-      {{-- adding active and open class if child is active --}}
-
-      {{-- menu headers --}}
       @if (isset($menu->menuHeader))
         <li class="menu-header mt-3">
             <span class="menu-header-text">{{ __($menu->menuHeader) }}</span>

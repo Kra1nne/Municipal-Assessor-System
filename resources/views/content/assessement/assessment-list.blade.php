@@ -152,10 +152,22 @@
               <label for="actual use">Actual Use</label>
             </div>
 
-             <div class="form-floating form-floating-outline mb-3">
+             <!-- <div class="form-floating form-floating-outline mb-3">
               <input type="text" class="form-control" id="sub_classification" name="sub_classification" placeholder="Enter Sub Classification" autofocus>
               <label for="sub_classification">Sub Classification</label>
+            </div> -->
+
+            <div class="form-floating form-floating-outline mb-3">
+              <select class="form-select" id="sub_classification" name="sub_classification" aria-label="Default select example">
+                <option value="" selected disabled>Select Sub Classsification</option>
+                <option value="Residential" >Residential</option>
+                <option value="Commercial" >Commercial</option>
+                <option value="Agricultural" >Agricultural</option>
+                <option value="Timberland" >Timberland</option>
+              </select>
+              <label for="sub_classification">Sub Classification</label>
             </div>
+
 
             <div class="form-floating form-floating-outline mb-3">
               <input type="date" class="form-control" id="date" name="date" placeholder="Enter date" autofocus>
@@ -294,8 +306,19 @@
               <label for="actual use">Actual Use</label>
             </div>
 
-             <div class="form-floating form-floating-outline mb-3">
+             <!-- <div class="form-floating form-floating-outline mb-3">
               <input type="text" class="form-control" id="Edit_sub_classification" name="sub_classification" placeholder="Enter Sub Classification" autofocus>
+              <label for="sub_classification">Sub Classification</label>
+            </div> -->
+
+            <div class="form-floating form-floating-outline mb-3">
+              <select class="form-select" id="Edit_sub_classification" name="sub_classification" aria-label="Default select example">
+                <option value="" selected disabled>Select Sub Classsification</option>
+                <option value="Residential" >Residential</option>
+                <option value="Commercial" >Commercial</option>
+                <option value="Agricultural" >Agricultural</option>
+                <option value="Timberland" >Timberland</option>
+              </select>
               <label for="sub_classification">Sub Classification</label>
             </div>
 

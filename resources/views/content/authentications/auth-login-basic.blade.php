@@ -6,6 +6,13 @@
 @vite([
   'resources/assets/vendor/scss/pages/page-auth.scss'
 ])
+<style>
+  body {
+    background: url("{{ asset('assets/img/backgrounds/cover2.jpg') }}") no-repeat center center fixed;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+</style>
 @endsection
 
 @section('page-script')
@@ -18,7 +25,7 @@
     <div class="authentication-inner py-6 mx-4">
 
       <!-- Login -->
-      <div class="card p-3">
+      <div class="card p-3 shadow-lg">
         <!-- Logo -->
         <div class="app-brand justify-content-center mt-5">
           <a href="{{url('/')}}" class="app-brand-link gap-3">

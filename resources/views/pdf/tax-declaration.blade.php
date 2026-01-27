@@ -17,7 +17,7 @@ $totalValue = $properties->area * $properties->market_value_data * ($properties-
 
   h3 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     text-transform: uppercase;
   }
 

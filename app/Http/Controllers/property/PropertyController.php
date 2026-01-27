@@ -101,9 +101,10 @@ class PropertyController extends Controller
         'ip_address' => request()->ip(),
         'created_at' => now(),
       ]);
-
+      
       $property = Property::insert([
         'users_id' => Auth::id(),
+        'parcel_id' => $request->parcel_id,
         'owner' => $request->owner,
         'lot_number' => $request->lot_number,
         'address' => $request->address,

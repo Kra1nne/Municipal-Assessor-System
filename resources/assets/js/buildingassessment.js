@@ -163,7 +163,7 @@ $(document).ready(function () {
                               <a href="/building-assessment/pdf/${property.ids}"
                                 target="_blank"
                                 class="dropdown-item assess">
-                                  View
+                                  <i class="ri-eye-line me-1"></i>View
                               </a>
 
                               <a class="dropdown-item EditBtn"
@@ -181,7 +181,11 @@ $(document).ready(function () {
                                   data-walls="${property.walls}"
                                   data-type="${property.type}"
                                   >
-                                  <i class="ri-pencil-lines me-1"></i> Edit
+                                  <i class="ri-pencil-line me-1"></i> Edit
+                              </a>
+                              <a class="dropdown-item"
+                                href="/gis-map?lot_number=${encodeURIComponent(property.lot_number)}">
+                                  <i class="ri-map-pin-line me-1"></i>Map
                               </a>
                           </div>
                       </div>
@@ -195,7 +199,11 @@ $(document).ready(function () {
                               <a class="dropdown-item assess"
                                 href="javascript:void(0);"
                                 data-bs-toggle="modal" data-bs-target="#AddModal" data-assessment_id="${property.assessment_id}" >
-                                  Assess
+                                  <i class="ri-pencil-line me-1"></i>Assess
+                              </a>
+                              <a class="dropdown-item"
+                                href="/gis-map?lot_number=${encodeURIComponent(property.lot_number)}">
+                                  <i class="ri-map-pin-line me-1"></i>Map
                               </a>
                           </div>
                       </div>
