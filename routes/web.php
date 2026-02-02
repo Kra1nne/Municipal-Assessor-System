@@ -6,43 +6,37 @@ use App\Http\Controllers\Map\MapController;
 use App\Http\Controllers\tax\TaxController;
 use App\Http\Controllers\dashboard\Analytics;
 use App\Http\Controllers\Account\UserController;
-use App\Http\Controllers\home\BookingController;
-use App\Http\Controllers\home\FeatureController;
-use App\Http\Controllers\home\PricingController;
-use App\Http\Controllers\pages\MiscTooManyRequest;
-use App\Http\Controllers\payment\PaymentController;
+use App\Http\Controllers\pages\MiscTooManyRequest;;
 use App\Http\Controllers\reports\ReportsController;
 use App\Http\Controllers\authentications\LoginBasic;
-use App\Http\Controllers\home\LandingPageController;
+use App\Http\Controllers\landing\LandingPageController;
 use App\Http\Controllers\pages\MiscUnderMaintenance;
 use App\Http\Controllers\assessor\AssessorController;
 use App\Http\Controllers\property\PropertyController;
 use App\Http\Controllers\market\MarketValueController;
 use App\Http\Controllers\pages\AccountSettingsAccount;
-use App\Http\Controllers\authentications\RegisterBasic;
 use App\Http\Controllers\assessment\AssessmentController;
-use App\Http\Controllers\facilities\FacilitiesController;
 use App\Http\Controllers\property\PropertyTypeController;
-use App\Http\Controllers\authentications\ForgotPasswordBasic;
 use App\Http\Controllers\request\RequestController;
 use App\Http\Controllers\land\LandPropertyController;
 use App\Http\Controllers\building\BuildingController;
 use App\Http\Controllers\GoogleAuthController;
 
 
-Route::middleware(['guest', 'throttle:web'])->group(function () {
-  Route::get('/register', [RegisterBasic::class, 'index'])->name('auth-register');
-  Route::post('/register/add', [RegisterBasic::class, 'store'])->name('auth-register-add');
+Route::get('/', [LandingPageController::class, 'landingpage'])->name('landing-page');
+Route::get('/about', [LandingPageController::class, 'about'])->name('about-page');
+Route::get('/services', [LandingPageController::class, 'services'])->name('services-page');
+Route::get('/contact', [LandingPageController::class, 'contact'])->name('contact-page');
 
-  Route::get('/', [LoginBasic::class, 'index'])->name('login');
+
+Route::middleware(['guest', 'throttle:web'])->group(function () {
+
+  Route::get('/login', [LoginBasic::class, 'index'])->name('login');
   Route::post('/login/process', [LoginBasic::class, 'login'])->name('login-process')->middleware(['throttle:login']);
 
   Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirect'])->name('auth.google.redirect')->middleware(['throttle:login']);
   Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->name('auth.google.callback')->middleware(['throttle:login']);
 
-
-  Route::get('/register', [RegisterBasic::class, 'index'])->name('auth-register');
-  Route::get('/forgot-password', [ForgotPasswordBasic::class, 'index'])->name('auth-reset-password');
 });
 
 Route::middleware(['auth', 'role:Admin,Employee,User', 'throttle:web'])->group(function () {
