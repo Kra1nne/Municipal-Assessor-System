@@ -5,5 +5,5 @@
 @include('layouts/sections/navbar/homenavbar')
 @yield('content')
 <!--/ Content -->
-
+@include('layouts/sections/footer/homefooter')
 @endsection

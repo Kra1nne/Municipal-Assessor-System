@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg d-flex align-items-center h-100 shadow-sm bg-white">
+<nav class="position-sticky top-0 navbar navbar-expand-lg d-flex align-items-center h-100 shadow-sm bg-white">
   <div class="container-fluid">
 
     <!-- Logo -->
