@@ -11,8 +11,9 @@
       <!-- HEADER -->
       <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-          <h2 id="clock" class="fw-bold mb-0"></h2>
+          <h2>Welcome, {{ Auth::user()->person->firstname }} {{ Auth::user()->person->lastname }}</h2>
           <small id="date" class="text-muted"></small>
+          <small id="clock" class="text-muted"></small>
         </div>
 
         <div class="text-end">
@@ -162,9 +163,32 @@
       </div>
     </div>
   </div>
+  
 </div>
-@endif
 
+@endif
+<div class="my-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="card w-100 shadow-sm border-0 text-center p-5">
+
+        <!-- Icon -->
+        <div class="mb-4">
+          <i class='ri-clipboard-line display-1 text-primary opacity-75'></i>
+        </div>
+
+        <!-- Title -->
+        <h4 class="fw-bold text-secondary">No Data to Display</h4>
+
+        <!-- Description -->
+        <p class="text-muted mb-0">
+          There is currently no data available to show.
+        </p>
+
+      </div>
+    </div>
+  </div>
+</div>
 
 </div>
 @endsection

@@ -2,9 +2,6 @@
 
 @section('title', 'Logs List')
 
-@section('page-script')
-@vite('resources/assets/js/logs.js')
-@endsection
 
 @section('content')
 <div class="row gy-6">

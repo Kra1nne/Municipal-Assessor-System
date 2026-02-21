@@ -72,17 +72,6 @@
     </header>
 
     <main>
-        @if (Auth::user()->role == "Admin" || Auth::user()->role == "Employee")
-         <div class="d-flex align-items-end">
-             <div class="mb-3 ms-auto">
-                <div class="d-flex align-items-center gap-2">
-                    <button class="btn btn-outline-secondary w-100 w-md-auto" title="View QGIS Project Documentation" aria-label="View QGIS Project Documentation">
-                        Documentation
-                    </button>
-                </div>
-            </div>
-        </div>
-        @endif
         <div class="card">
             <div class="mb-3 d-flex flex-column flex-md-row align-items-start align-items-md-center px-3 mt-3 gap-3">
                 <div class="align-items-start flex-grow-1 w-100">
@@ -277,7 +266,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     layer.openPopup();
                 });
 
-                map.fitBounds(group.getBounds(), { padding: [40, 40] });
+                map.fitBounds(group.getBounds(), { padding: [20, 20] });
             })
             .catch(err => console.error(err));
     }

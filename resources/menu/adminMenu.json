@@ -80,7 +80,7 @@
     },
     {
       "url": "/logs",
-      "name": "logs",
+      "name": "Logs",
       "icon": "menu-icon tf-icons ri-file-text-line",
       "slug": "logs-list"
     }

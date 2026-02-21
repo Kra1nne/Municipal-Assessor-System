@@ -8,9 +8,13 @@
 ])
 <style>
   body {
-    background: url("{{ asset('assets/img/backgrounds/cover2.jpg') }}") no-repeat center center fixed;
+     background-image:
+            linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+            url('{{ asset('assets/img/backgrounds/cover2.jpg') }}');
     background-size: cover;
     background-attachment: fixed;
+            background-position: center;
+        background-repeat: no-repeat;
   }
 </style>
 @endsection
