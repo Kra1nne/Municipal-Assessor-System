@@ -31,9 +31,9 @@ class PropertyController extends Controller
 
     public function index()
     {
-      $countall = Property::count();
-      $countReview = Property::where('status', '=', 'Under Review')->count();
-      $countComplete = Property::where('status', '=', 'Complete')->count();
+      $countall = Property::whereNull('deleted_at')->count();
+      $countReview = Property::whereNull('deleted_at')->where('status', '=', 'Under Review')->count();
+      $countComplete = Property::whereNull('deleted_at')->where('status', '=', 'Complete')->count();
 
       $properties = Property::leftjoin('assessment', 'properties.id', '=', 'assessment.properties_id')
                             ->leftjoin('assessor', 'assessment.assessor_id', '=', 'assessor.id')
@@ -166,7 +166,7 @@ class PropertyController extends Controller
     }
     public function delete(Request $request){
 
-      $property = Property::where('id', Crypt::decryptString($request->id))->update([
+      $property = Property::where('id', $request->id)->update([
         'deleted_at' => now(),
       ]);
 

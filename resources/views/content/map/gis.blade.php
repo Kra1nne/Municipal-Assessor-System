@@ -71,7 +71,7 @@
 
     </header>
 
-    <main>
+    <main id="mapContent">
         <div class="card">
             <div class="mb-3 d-flex flex-column flex-md-row align-items-start align-items-md-center px-3 mt-3 gap-3">
                 <div class="align-items-start flex-grow-1 w-100">
@@ -125,6 +125,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     const forceLabel = @json(Auth::user()->role == "User");
+    let pauseAutoReload = false;
 
     // Color mapping for ActualUse
     const useColor = {
@@ -139,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     // Initialize map
-    const map = L.map("map", { preferCanvas: true }).setView([10.518201, 124.768402], 13);
+    const map = L.map("map", { preferCanvas: true, closePopupOnClick: false }).setView([10.518201, 124.768402], 13);
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
 
     // Function to style parcels
@@ -214,7 +215,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const loadParcelsDebounced = debounce(loadParcels, 300);
-    map.on("moveend", loadParcelsDebounced);
+    map.on("moveend", function () {
+        if (!pauseAutoReload) {
+            loadParcelsDebounced();
+        }
+    });
     loadParcels();
 
     // Search functionality
@@ -235,7 +240,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 const group = L.featureGroup();
                 parcelLayer.eachLayer(l => group.addLayer(l));
-                map.fitBounds(group.getBounds(), { padding: [40,40] });
+                map.fitBounds(group.getBounds(), { padding: [20, 20] });
+
+                setTimeout(function () {
+                    $('html, body').animate({
+                        scrollTop: $('#mapContent').offset().top
+                    }, 800);
+                }, 300);
+
+                setTimeout(() => {
+                    pauseAutoReload = false;
+                }, 20000);
+                
             });
     });
 
@@ -267,6 +283,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
 
                 map.fitBounds(group.getBounds(), { padding: [20, 20] });
+
+                setTimeout(function () {
+                    $('html, body').animate({
+                        scrollTop: $('#mapContent').offset().top
+                    }, 800);
+                }, 300);
+                
             })
             .catch(err => console.error(err));
     }
