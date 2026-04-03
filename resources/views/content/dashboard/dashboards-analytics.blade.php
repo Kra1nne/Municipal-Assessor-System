@@ -168,24 +168,29 @@
 
 @endif
 <div class="my-4">
-  <div class="row">
-    <div class="col-12">
-      <div class="card w-100 shadow-sm border-0 text-center p-5">
-
-        <!-- Icon -->
-        <div class="mb-4">
-          <i class='ri-clipboard-line display-1 text-primary opacity-75'></i>
-        </div>
-
-        <!-- Title -->
-        <h4 class="fw-bold text-secondary">No Data to Display</h4>
-
-        <!-- Description -->
-        <p class="text-muted mb-0">
-          There is currently no data available to show.
-        </p>
-
-      </div>
+  <div class="card p-2">
+     <h6>Recent Market Value</h6>
+    <div class="table-responsive text-nowrap overflow-auto">
+      <table class="table table-hover">
+        <thead class="position-sticky top-0 bg-body">
+          <tr>
+            <th>Property Type</th>
+            <th>Class</th>
+            <th>Value</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody class="table-border-bottom-0">
+          @foreach ($marketValues as $item)
+              <tr>
+                <th>{{ $item->type_name }}</th>
+                <th>{{ $item->class }}</th>
+                <th>{{ $item->value }}</th>
+                <th>{{ date('M d Y', strtotime($item->created_at)) }}</th>  
+              </tr>
+          @endforeach
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

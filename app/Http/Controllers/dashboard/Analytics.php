@@ -2,20 +2,25 @@
 
 namespace App\Http\Controllers\dashboard;
 
-use App\Models\Log;
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Log;
+use App\Models\MarketValue;
 use App\Models\Property;
 use App\Models\Requests;
+use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
-use Carbon\Carbon;
 
 class Analytics extends Controller
 {
   public function index()
   {
+    $marketValues = MarketValue::leftjoin('property_list', 'market_value.property_list', '=', 'property_list.id')
+                        ->orderBy('market_value.created_at', 'Desc')
+                        ->Select('market_value.*', 'property_list.name as type_name', 'property_list.id as list_id')
+                        ->get();
     $properties = Property::leftjoin('assessment', 'properties.id', '=', 'assessment.properties_id')
                             ->leftjoin('property_type', 'assessment.property_type', '=', 'property_type.id')
                             ->leftjoin('market_value', 'assessment.market_id', '=', 'market_value.id')
@@ -60,7 +65,7 @@ class Analytics extends Controller
                 ->orderby('logs.created_at', 'desc')
                 ->limit(10)
                 ->get();
-    return view('content.dashboard.dashboards-analytics', compact('user', 'log', 'activeUsers', 'inactiveUsers','properties', 'total', 'count', 'completecount', 'completepending'));
+    return view('content.dashboard.dashboards-analytics', compact('user', 'log', 'activeUsers', 'inactiveUsers','properties', 'total', 'count', 'completecount', 'completepending', 'marketValues'));
   }
   public function logslist(){
     $log = Log::leftjoin('users', 'logs.user_id', '=', 'users.id')

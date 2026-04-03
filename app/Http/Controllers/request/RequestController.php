@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\request;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Requests;
+use App\Mail\SendMail;
 use App\Models\Log;
 use App\Models\Property;
+use App\Models\Requests;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class RequestController extends Controller
 {
@@ -27,7 +29,7 @@ class RequestController extends Controller
                   ->orderBy('request.created_at', 'desc')
                   ->select('request.*','users.*', 'person.*', 'request.id as request_id')
                   ->get();
-
+    
       return view('content.request.request-list', compact('request','property'));
     }
     public function accept(Request $request){
@@ -47,10 +49,11 @@ class RequestController extends Controller
 
         Property::where('id', $property->id)->update($data);
       }
-
+      $message = 'We are pleased to inform you that your request submitted through the Municipal Assessor System has been successfully reviewed and approved. Upon careful evaluation, all required information and supporting documents have been found to be complete and compliant with the established requirements. Accordingly, your Tax Declaration is now available and may be accessed and viewed through the system at your convenience.'; 
       $data = [
         'assessment_id' => $request->lot,
         'status' => "Success",
+        'message' => $message,
         'updated_at' => now(),
       ];
       Requests::where('id', $request->id)->update($data);
@@ -64,13 +67,25 @@ class RequestController extends Controller
       ];
       $logData = Log::insert($log);
 
+      $user = Requests::leftjoin('users', 'users.id', '=', 'request.users_id')
+        ->where('request.id', $request->id)
+        ->first();
+
+      
+      $mailData = [
+          'description' => $message,
+          'email' => $user->email,
+      ];
+      Mail::to($user->email)->send(new SendMail($mailData));
+
       if($logData){
         return response()->json(['Error' => 0, 'Message' => 'Successfully send the request.']);
       }
     }
     public function decline(Request $request){
-
+    
       $data = [
+        'message' => $request->message,
         'status' => "Decline",
         'updated_at' => now(),
       ];
@@ -84,6 +99,11 @@ class RequestController extends Controller
         'created_at' => now(),
       ];
       $logData = Log::insert($log);
+      $mailData = [
+          'description' => $request->message,
+          'email' => $request->recipient,
+      ];
+      Mail::to($request->recipient)->send(new SendMail($mailData));
 
       if($logData){
         return response()->json(['Error' => 0, 'Message' => 'Successfully Decline the Request.']);

@@ -116,34 +116,33 @@
 
           <form id="ProductData" enctype="multipart/form-data" class="mb-5">
             @csrf
-
              <div class="form-group mb-5">
               <label for="">Request form for Updated Tax Declaration</label>
-              <input type="file" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf" class="form-control mt-3 " id="request_form" name="request_form" autofocus>
+              <input type="file" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf" class="form-control mt-3 " id="request_form" name="request_form">
             </div>
              <div class="form-group mb-5">
               <label for="">Transfer Certificate of Title/Original Certificate of Title</label>
-              <input type="file" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf" class="form-control mt-3" id="certificate" name="certificate" autofocus>
+              <input type="file" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf" class="form-control mt-3" id="certificate" name="certificate">
             </div>
              <div class="form-group mb-5">
               <label for="">Deed of Sale or any proof of transfer</label>
-              <input type="file" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf" class="form-control mt-3" id="proff_of_transfer" name="proff_of_transfer" autofocus>
+              <input type="file" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf" class="form-control mt-3" id="proff_of_transfer" name="proff_of_transfer">
             </div>
              <div class="form-group mb-5">
               <label for="">Certificate Authorizing Registration</label>
-              <input type="file" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf" class="form-control mt-3" id="authorizing" name="authorizing" autofocus>
+              <input type="file" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf" class="form-control mt-3" id="authorizing" name="authorizing">
             </div>
             <div class="form-group mb-5">
               <label for="">Updated Real Property Tax Payment</label>
-              <input type="file" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf" class="form-control mt-3" id="updated_tax" name="updated_tax" autofocus>
+              <input type="file" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf" class="form-control mt-3" id="updated_tax" name="updated_tax">
             </div>
              <div class="form-group mb-5">
               <label for="">Transfer Tax Receipt</label>
-              <input type="file" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf"  class="form-control mt-3" id="transfer_tax" name="transfer_tax" autofocus>
+              <input type="file" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf"  class="form-control mt-3" id="transfer_tax" name="transfer_tax">
             </div>
              <div class="form-group mb-5">
               <label for="">Latest Tax Declaration</label>
-              <input type="file" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf" class="form-control mt-3" id="tax_reciept" name="tax_reciept" autofocus>
+              <input type="file" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf" class="form-control mt-3" id="tax_reciept" name="tax_reciept">
             </div>
           </form>
         </div>
@@ -151,6 +150,54 @@
           <button type="button" class="btn btn-primary d-grid w-100 mb-5" id="AddRequest">Submit</button>
       </div>
       </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="MessageModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-white rounded-4 shadow-sm">
+
+      <!-- Header -->
+      <div class="modal-header border-0 px-4 pt-4 pb-2">
+        <h5 class="modal-title text-dark">
+          Notice
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body px-4 pb-4 pt-2">
+
+        <!-- Brand -->
+        <div class="text-center mb-4">
+          <div class="text-dark">
+            {{ config('variables.templateName') }}
+          </div>
+        </div>
+
+        <!-- Message -->
+        <div class="p-0">
+
+          <p class="mb-3 text-dark">
+            Good day,
+          </p>
+
+          <p class="mb-3 text-dark">
+            We regret to inform you that your request has been declined due to the following reason:
+          </p>
+
+          <p class="mb-3 text-dark" id="MessageContent">
+            <!-- Reason will be injected here -->
+          </p>
+
+          <p class="mb-0 text-dark small">
+            If you have any questions or need further clarification, please contact support.
+          </p>
+
+        </div>
+
+      </div>
+
     </div>
   </div>
 </div>

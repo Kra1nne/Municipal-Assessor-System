@@ -81,6 +81,7 @@ Route::middleware(['auth', 'role:Admin,Employee,User', 'throttle:web'])->group(f
     Route::post('/assessor/add', [AssessorController::class, 'store'])->name('assessor-add');
     Route::post('/assessor/update', [AssessorController::class, 'update'])->name('assessor-update');
     Route::post('/assessor/delete', [AssessorController::class, 'delete'])->name('assessor-delete');
+    Route::post('/assessor/e-signature', [AssessorController::class, 'save'])->name('assessor-signature');
 
     Route::get('/property-type', [PropertyTypeController::class, 'index'])->name('property-types');
     Route::post('/property-type/add', [PropertyTypeController::class, 'store'])->name('property-type-add');

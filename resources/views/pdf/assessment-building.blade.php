@@ -528,7 +528,41 @@ $assessment_value = $market_value * ($properties->percentage / 100);
     <td style="border:none"><b>Appraised by:</b></td>
   </tr>
   <tr>
-    <td style="border:none" class="mt-2"><span class="display field_md text-cente text-sm"><b><?= $Assessment_Clerk_1->fullname ?></b></span></td>
+    <td style="border:none;">
+      <img src="{{ storage_path('app/public/' . $Assessment_Clerk_1->signature) }}"
+          style="
+            position: absolute;
+            margin-left: 90px;
+            margin-top: -20px;
+            height: 40px;
+            z-index: 10;
+          ">
+    </td>
+     <td style="border:none;">
+      <img src="{{ storage_path('app/public/' . $OIC_Municilap_Assessor->signature) }}"
+          style="
+            position: absolute;
+            margin-left: 90px;
+            margin-top: -20px;
+            height: 40px;
+            z-index: 10;
+          ">
+    </td>
+     <td style="border:none;">
+      <img src="{{ storage_path('app/public/' . $Technical_Supervisor->signature) }}"
+          style="
+            position: absolute;
+            margin-left: 90px;
+            margin-top: -20px;
+            height: 40px;
+            z-index: 10;
+          ">
+    </td>
+  </tr>
+  <tr>
+    <td style="border:none" class="mt-2"><span class="display field_md text-cente text-sm">
+      <b><?= $Assessment_Clerk_1->fullname ?></b>
+    </span></td>
     <td style="border:none" class="mt-2"><span class="display field_md text-center text-sm"><b><?= $OIC_Municilap_Assessor->fullname ?></b></span></td>
     <td style="border:none" class="mt-2"><span class="display field_md text-center text-sm"><b><?= $Technical_Supervisor->fullname ?></b></span></td>
   </tr>
@@ -542,7 +576,20 @@ $assessment_value = $market_value * ($properties->percentage / 100);
   <span class="display"><b>Approved by:</b></span>
 </div>
 <div class="mt-2">
-<span style="margin-left: 130px" class="field_md text-center text-sm"><b><?= $properties->fullname ?></b></span><span style="margin-left: 50px" class="field_xs text-center"><?=  date('M. d, Y', strtotime(now())) ?></span>
+  <div style="position: relative">
+     <img src="{{ storage_path('app/public/' . $Assessor->signature) }}" 
+          style="
+            position: absolute;
+            margin-left: 190px;
+            margin-top: -30px;
+            height: 40px;
+            z-index: 10;
+          ">
+    <span style="margin-left: 130px" class="field_md text-center text-sm">
+      <b><?= $Assessor->fullname ?></b>
+    </span>
+    <span style="margin-left: 50px" class="field_xs text-center"><?=  date('M. d, Y', strtotime(now())) ?></span>
+  </div>
 </div>
 <div><span style="margin-left: 160px;">Provincial Assessor</span><span style="margin-left: 120px;">Date</span></div>
 <div class="mt-2">

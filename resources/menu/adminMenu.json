@@ -32,7 +32,7 @@
     },
     {
       "url": "/gis-map",
-      "name": "GIS Map",
+      "name": "Land Transaction",
       "icon": "menu-icon tf-icons ri-map-pin-range-fill",
       "slug": "map-gis"
     },

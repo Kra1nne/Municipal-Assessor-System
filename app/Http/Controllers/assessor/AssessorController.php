@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\assessor;
 
-use App\Models\Log;
-use App\Models\Assessor;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Assessor;
+use App\Models\Log;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Storage;
 
 class AssessorController extends Controller
 {
@@ -86,5 +87,35 @@ class AssessorController extends Controller
       if($assessor){
         return response()->json(['Error' => 0, 'Message' => 'Successfully deleted a data']);
       }
+    }
+    public function save(Request $request)
+    {
+        $assessor = Assessor::where('id',Crypt::decryptString($request->id))->first();
+        
+        if ($assessor && $assessor->signature != null) {
+            if (Storage::disk('public')->exists($assessor->signature)) {
+                Storage::disk('public')->delete($assessor->signature);
+            }
+        }
+
+        $now = date('Ymd_His');
+
+        $data = str_replace('data:image/png;base64,', '', $request->signature);
+        $data = str_replace(' ', '+', $data);
+
+        $fileName = 'signature_' . $now . '.png';
+        $path = Storage::disk('public')->put('signatures/' . $fileName, base64_decode($data));
+
+        $data = [
+          'signature' => 'signatures/'. $fileName,
+          'updated_at' => now()
+        ];
+        $result = Assessor::where('id', Crypt::decryptString($request->id))->update($data);
+
+        if(!$result){
+          return response()->json(['Error' => 1, 'Message' => 'Data unable to save']);
+        }
+
+        return response()->json(['Error' => 0, 'Message' => 'Signature successfully created']);
     }
 }

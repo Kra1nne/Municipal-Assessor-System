@@ -134,11 +134,29 @@ $(document).ready(function () {
           <td>Requested of the Tax Declaration of the Property</td>
           <td>${new Date(request.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</td>
           <td>
-            <a target="_blank"
-              class="btn ${request.status === 'Success' ? 'btn-success' : request.status === 'Request' ? 'btn-warning disabled-link' : 'btn-danger'}"
-              href="${request.status === 'Success' ? `/myproperty/pdf/${request.encrypted_assessment_id}` : '#'}"
+            <a 
+              data-message="${request.message}" 
+              ${request.status === 'Success' ? 'target="_blank"' : ''}
+              class="btn ${
+                request.status === 'Success'
+                  ? 'btn-success'
+                  : request.status === 'Request'
+                  ? 'btn-warning disabled-link'
+                  : 'btn-danger ModalMessage'
+              }"
+              href="${
+                request.status === 'Success'
+                  ? `/myproperty/pdf/${request.encrypted_assessment_id}`
+                  : 'javascript:void(0)'
+              }"
             >
-              ${request.status === 'Success' ? 'View' : request.status === 'Request' ? 'Pending' : 'Decline'}
+              ${
+                request.status === 'Success'
+                  ? 'View'
+                  : request.status === 'Request'
+                  ? 'Pending'
+                  : 'View'
+              }
             </a>
           </td>
         </tr>
@@ -163,3 +181,9 @@ $(document).ready(function () {
   // Render all properties on page load
   displayRequest(window.request);
 });
+
+$(document).on('click', '.ModalMessage', function() {
+  $('#MessageModal').modal('show');
+  const message = $(this).data('message');
+  $('#MessageContent').text(message);
+})

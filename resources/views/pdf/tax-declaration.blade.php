@@ -340,7 +340,7 @@ $totalValue = $properties->area * $properties->market_value_data * ($properties-
       </tr>
     </table>
   </div>
-  <div style="margin-top: 10px;">
+  <div style="margin-top: 5px;">
     Total Assessed Value:
     <span class="field_xxl text-center">
     {{ convertNumberToWords($totalValue)}}
@@ -372,15 +372,38 @@ $totalValue = $properties->area * $properties->market_value_data * ($properties-
     </div>
 
   </div>
-  <div style="margin-top: 10px;">RECOMMENDED BY:</div>
+  <div style="margin-top: 5px;">RECOMMENDED BY:</div>
   <table style="margin-top: 10px;">
+    <tr>
+      <td></td>
+      <td>
+        <img src="{{ storage_path('app/public/' . $OIC_Municilap_Assessor->signature) }}"
+         style="
+            position: absolute;
+            margin-left: 60px;
+            margin-top: -20px;
+            height: 40px;
+            z-index: 10;
+          ">
+      </td>
+      <td>
+        <img src="{{ storage_path('app/public/' . $Assessor->signature) }}" 
+          style="
+            position: absolute;
+            margin-left: 60px;
+            margin-top: -20px;
+            height: 40px;
+            z-index: 10;
+          ">
+      </td>
+    </tr>
     <tr>
       <td><span class="label">APPROVED BY:</span></td>
       <td>
         <span class="field_md text-center label"><?= $OIC_Municilap_Assessor->fullname ?></span>
       </td>
       <td>
-        <span class="field_md text-center label"><?= $properties->fullname ?></span>
+        <span class="field_md text-center label"><?= $Assessor->fullname ?></span>
       </td>
       <td>
         <span class="field_xxs text-center label"><?= date("d/m/Y", strtotime(now())); ?></span>

@@ -162,7 +162,8 @@ document.addEventListener("DOMContentLoaded", function () {
             layer.bindPopup(`
                 <b>Lot:</b> ${p.LotNumber ?? "Unknown"}<br>
                 <b>Owner:</b> ${p.Owner ?? "Unknown"}<br>
-                <b>Use:</b> ${p.ActualUse ?? "N/A"}
+                <b>Address:</b>${p.Municipali ?? 'N/A'}, ${p.BarangayNa ?? "N/A"}<br>
+                <b>Area size:</b> ${p.Area_sqm ?? "N/A"}<br>
             `);
 
             if (forceLabel) {

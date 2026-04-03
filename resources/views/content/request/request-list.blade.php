@@ -210,6 +210,46 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="DeclineModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="app-brand justify-content-center mt-5">
+          <a href="{{url('/')}}" class="app-brand-link gap-3">
+            <span class="app-brand-logo demo">@include('_partials.macros',["height"=>20])</span>
+            <span class="app-brand-text demo text-heading fw-semibold">{{ config('variables.templateName') }}</span>
+          </a>
+        </div>
+
+        <div class="card-body mt-5">
+
+          <form id="DataDecline" class="mb-5">
+            @csrf
+            <input type="hidden" name="id" id="id_number">
+            <div class="row px-sm-1 pt-4">
+                <div class="col-md-12 mt-2">
+                    <label for="name" class="fw-bolder text-black mb-2">Recient</label>
+                    <input type="text" class="form-control" id="recipient" name="recipient" placeholder="Enter property owner" readonly>
+                </div>
+            </div>
+            <div class="row px-sm-1 pt-4">
+                <div class="col-md-12 mt-2">
+                    <label for="message" class="fw-bolder text-black mb-2">Message</label>
+                    <textarea name="message" value="" id="message" class="form-control no-resize" style="resize: none;" rows="10" autofocus></textarea>
+                </div>
+            </div>
+          </form>
+        </div>
+        <div>
+          <button type="button" class="btn btn-primary d-grid w-100 mb-5" id="DeclineSumbit">Submit</button>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
   window.request = @json($request);
 </script>

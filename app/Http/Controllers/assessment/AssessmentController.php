@@ -200,16 +200,17 @@ class AssessmentController extends Controller
   {
     $OIC_Municilap_Assessor = Assessor::where('role', '=', 'OIC Municipal Assessor')
                                 ->whereNull('deleted_at')
-                                ->selectRaw("CONCAT(assessor.firstname, ' ', assessor.middlename, ' ', assessor.lastname) as fullname")
+                                ->selectRaw("CONCAT(assessor.firstname, ' ', assessor.middlename, ' ', assessor.lastname) as fullname, assessor.signature as signature")
                                 ->first();
-    $Technical_Supervisor = Assessor::where('role', '=', 'Technical Supervisor')
+   
+    $Assessor = Assessor::where('role', '=', 'Assessor')
                                 ->whereNull('deleted_at')
-                                ->selectRaw("CONCAT(assessor.firstname, ' ', assessor.middlename, ' ', assessor.lastname) as fullname")
+                                ->selectRaw("CONCAT(assessor.firstname, ' ', assessor.middlename, ' ', assessor.lastname) as fullname, assessor.signature as signature")
                                 ->first();
 
     $Assessment_Clerk_1 = Assessor::where('role', '=', 'Assessment Clerk 1')
                                 ->whereNull('deleted_at')
-                                ->selectRaw("CONCAT(assessor.firstname, ' ', assessor.middlename, ' ', assessor.lastname) as fullname")
+                                ->selectRaw("CONCAT(assessor.firstname, ' ', assessor.middlename, ' ', assessor.lastname) as fullname, assessor.signature as signature")
                                 ->first();
 
     $properties = Property::leftjoin('assessment', 'properties.id', '=', 'assessment.properties_id')
@@ -226,7 +227,7 @@ class AssessmentController extends Controller
     $pdf = Pdf::loadView('pdf.assessment-pdf', [
         'properties' => $properties,
         'Assessment_Clerk_1' => $Assessment_Clerk_1,
-        'Technical_Supervisor' => $Technical_Supervisor,
+        'Assessor' => $Assessor,
         'OIC_Municilap_Assessor' => $OIC_Municilap_Assessor
     ]);
 
@@ -397,15 +398,21 @@ class AssessmentController extends Controller
   public function buildingPDF($id)
   {
     $OIC_Municilap_Assessor = Assessor::where('role', '=', 'OIC Municipal Assessor')
-                                ->selectRaw("CONCAT(assessor.firstname, ' ', assessor.middlename, ' ', assessor.lastname) as fullname")
+                                ->selectRaw("CONCAT(assessor.firstname, ' ', assessor.middlename, ' ', assessor.lastname) as fullname, assessor.signature as signature")
                                 ->first();
     $Technical_Supervisor = Assessor::where('role', '=', 'Technical Supervisor')
-                                ->selectRaw("CONCAT(assessor.firstname, ' ', assessor.middlename, ' ', assessor.lastname) as fullname")
+                                ->selectRaw("CONCAT(assessor.firstname, ' ', assessor.middlename, ' ', assessor.lastname) as fullname, assessor.signature as signature")
                                 ->first();
 
     $Assessment_Clerk_1 = Assessor::where('role', '=', 'Assessment Clerk 1')
-                                ->selectRaw("CONCAT(assessor.firstname, ' ', assessor.middlename, ' ', assessor.lastname) as fullname")
+                                ->selectRaw("CONCAT(assessor.firstname, ' ', assessor.middlename, ' ', assessor.lastname) as fullname, assessor.signature as signature")
                                 ->first();
+    
+    $Assessor = Assessor::where('role', '=', 'Assessor')
+                                ->whereNull('deleted_at')
+                                ->selectRaw("CONCAT(assessor.firstname, ' ', assessor.middlename, ' ', assessor.lastname) as fullname, assessor.signature as signature")
+                                ->first();
+
 
     $properties = Property::leftjoin('assessment', 'properties.id', '=', 'assessment.properties_id')
       ->leftjoin('assessor', 'assessment.assessor_id', '=', 'assessor.id')
@@ -429,7 +436,8 @@ class AssessmentController extends Controller
         'properties' => $properties,
         'OIC_Municilap_Assessor' => $OIC_Municilap_Assessor,
         'Technical_Supervisor' => $Technical_Supervisor,
-        'Assessment_Clerk_1' => $Assessment_Clerk_1
+        'Assessment_Clerk_1' => $Assessment_Clerk_1,
+        'Assessor' => $Assessor
     ]);
   //dd($properties);
     return $pdf->setPaper('A4', 'portrait')

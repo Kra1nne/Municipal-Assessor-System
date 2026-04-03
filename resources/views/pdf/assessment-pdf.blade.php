@@ -417,10 +417,29 @@
   </div>
   <div class="mt-1">
     <div>
-      <span style="margin-left: 20px;" class="field_sm text-center"><?= $Assessment_Clerk_1->fullname ?></span>
+      <div style="position: realative; ">
+        <img src="{{ storage_path('app/public/' . $Assessment_Clerk_1->signature) }}" 
+          style="
+            position: absolute;
+            margin-left: 60px;
+            margin-top: -20px;
+            height: 40px;
+            z-index: 10;
+          ">
+        <span style="margin-left: 20px;" class="field_sm text-center"><?= $Assessment_Clerk_1->fullname ?></span>
+        <span style="margin-left: 20px;" class="field_xs text-center"><?= date("d/m/Y", strtotime(now())); ?></span>
+        <img src="{{ storage_path('app/public/' . $Assessor->signature) }}" 
+          style="
+            position: absolute;
+            margin-left: 120px;
+            margin-top: -20px;
+            height: 40px;
+            z-index: 10;
+          ">
+
+      <span style="margin-left: 60px;" class="field_sm text-center"><?=  $Assessor->fullname?></span>
       <span style="margin-left: 20px;" class="field_xs text-center"><?= date("d/m/Y", strtotime(now())); ?></span>
-      <span style="margin-left: 60px;" class="field_sm text-center"><?=  $properties->fullname?></span>
-      <span style="margin-left: 20px;" class="field_xs text-center"><?= date("d/m/Y", strtotime(now())); ?></span>
+      </div>
     </div>
   </div>
   <div>
@@ -443,9 +462,22 @@
     <span class="display"><b>Approved by:</b></span>
   </div>
   <div class="mt-2">
-    <div>
-      <span style="margin-left: 70px;" class="field_sm text-center"><?= $OIC_Municilap_Assessor->fullname ?></span>
-      <span style="margin-left: 180px;" class="field_xs text-center"><?= date("d/m/Y", strtotime(now())); ?></span>
+    <div style="position: relative;">
+      <img src="{{ storage_path('app/public/' . $OIC_Municilap_Assessor->signature) }}"
+          style="
+            position: absolute;
+            margin-left: 130px;
+            margin-top: -20px;
+            height: 40px;
+            z-index: 10;
+          ">
+
+      <span style="margin-left: 70px;" class="field_sm text-center">
+        <?= $OIC_Municilap_Assessor->fullname ?>
+      </span>
+      <span style="margin-left: 180px;" class="field_xs text-center">
+        <?= date("d/m/Y", strtotime(now())); ?>
+      </span>
     </div>
   </div>
   <div>

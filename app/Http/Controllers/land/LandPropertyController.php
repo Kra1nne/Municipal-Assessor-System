@@ -28,7 +28,6 @@ class LandPropertyController extends Controller
                         $req->encrypted_assessment_id = Crypt::encryptString($req->assessment_id);
                         return $req;
                     });
-
       return view('content.request.land_property', compact('request'));
     }
     public function request(Request $request)
@@ -85,12 +84,17 @@ class LandPropertyController extends Controller
 
       $OIC_Municilap_Assessor = Assessor::where('role', '=', 'OIC Municipal Assessor')
                                 ->whereNull('deleted_at')
-                                ->selectRaw("CONCAT(assessor.firstname, ' ', assessor.middlename, ' ', assessor.lastname) as fullname")
+                                ->selectRaw("CONCAT(assessor.firstname, ' ', assessor.middlename, ' ', assessor.lastname) as fullname, assessor.signature as signature")
                                 ->first();
+      $Assessor = Assessor::where('role', '=', 'Assessor')
+                                ->whereNull('deleted_at')
+                                ->selectRaw("CONCAT(assessor.firstname, ' ', assessor.middlename, ' ', assessor.lastname) as fullname, assessor.signature as signature")
+                                ->first();                          
 
       $pdf = Pdf::loadView('pdf.tax-declaration', [
           'properties' => $properties,
-          'OIC_Municilap_Assessor' => $OIC_Municilap_Assessor
+          'OIC_Municilap_Assessor' => $OIC_Municilap_Assessor,
+          'Assessor' => $Assessor
       ]);
 
       return $pdf->setPaper('A4', 'portrait')

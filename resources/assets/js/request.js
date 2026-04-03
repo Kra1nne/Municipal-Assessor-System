@@ -115,7 +115,7 @@ $(document).ready(function () {
                         data-id="${request.request_id}">
                         <i class="ri-checkbox-circle-line me-1 text-success"></i> Send
                       </a>
-                      <a class="dropdown-item Decline" href="javascript:void(0);" data-id="${request.request_id}">
+                      <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#DeclineModal" id="DeclineBtn" data-id="${request.request_id}" data-email="${request.email}">
                         <i class="ri-close-circle-line me-1 text-danger"></i> Decline
                       </a>
                     `
@@ -159,30 +159,34 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-  $('body').on('click', '.Decline', function () {
+  $('body').on('click', '#DeclineBtn', function() {
     const id = $(this).data('id');
-    console.log(id);
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Decline!',
-      cancelButtonText: 'No, cancel!',
-      reverseButtons: true
-    }).then(result => {
-      if (result.isConfirmed) {
-        $.ajax({
+    const email = $(this).data('email');
+    
+    $('#id_number').val(id);
+    $('#recipient').val(email);
+  })
+  $('body').on('click', '#DeclineSumbit', function () {
+    const fields = [
+      { id: 'message', label: 'Message' },
+      { id: 'recipient', label: 'Recipient' }
+    ];
+
+    const isValid = validateForm(fields);
+
+    if (!isValid) {
+      event.preventDefault();
+      return;
+    }
+    $.ajax({
           type: 'POST',
           url: '/request/decline',
           cache: false,
-          data: {
-            _token: $('meta[name="csrf-token"]').attr('content'),
-            id: id
-          },
+          data: $('#DataDecline').serialize(),
           dataType: 'json',
           beforeSend: function () {
             $('.preloader').show();
+            $('#DeclineModal').modal('hide');
           },
           success: function (data) {
             $('.preloader').hide();
@@ -206,8 +210,6 @@ $(document).ready(function () {
             Swal.fire('Error!', 'Something went wrong, please try again.', 'error');
           }
         });
-      }
-    });
   });
 });
 

@@ -130,6 +130,9 @@ $(document).ready(function () {
                 <a class="dropdown-item DeleteBtn" href="javascript:void(0);" data-id="${assessor.encrypted_id}">
                   <i class="ri-delete-bin-6-line me-1"></i> Delete
                 </a>
+                <a class="dropdown-item signatureButton" href="javascript:void(0);" data-id="${assessor.encrypted_id}" data-bs-toggle="modal" data-bs-target="#signatureModal">
+                  <i class="ri-quill-pen-line me-1"></i> E-Signature
+                </a>
               </div>
             </div>
           </td>
@@ -274,3 +277,8 @@ $(document).ready(function () {
     });
   });
 });
+
+$(document).on('click', '.signatureButton', function() {
+  const id = $(this).data('id');
+  $('#idNumberSignature').val(id);
+})

@@ -54,7 +54,10 @@ class MapController extends Controller
                   'property_type.assessment_rate',
                   'properties.status as property_status',
                   'property_list.name as ActualUse',
-                  'properties.id as property_id'
+                  'properties.id as property_id',
+                  'properties.municipality',
+                  'properties.brgy',
+                  'properties.area_sqm'
               )
               ->whereNull('properties.deleted_at')
               ->orderBy('properties.created_at', 'Desc')
@@ -99,7 +102,10 @@ class MapController extends Controller
                     'property_type.assessment_rate',
                     'properties.status as property_status',
                     'property_list.name as ActualUse',
-                    'properties.id as property_id'
+                    'properties.id as property_id',
+                    'properties.municipality',
+                    'properties.brgy',
+                    'properties.area_sqm'
                 )
                 ->whereNull('properties.deleted_at')
                 ->where('request.users_id', Auth::id())

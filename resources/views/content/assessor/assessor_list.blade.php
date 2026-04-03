@@ -160,6 +160,35 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="signatureModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="app-brand justify-content-center mt-5">
+          <a href="{{url('/')}}" class="app-brand-link gap-3">
+            <span class="app-brand-logo demo">@include('_partials.macros',["height"=>20])</span>
+            <span class="app-brand-text demo text-heading fw-semibold">{{ config('variables.templateName') }}</span>
+          </a>
+        </div>
+
+        <div class="card-body mt-5">
+          <form id="DataDecline" class="mb-5 d-flex justify-content-center">
+            @csrf
+            <input type="hidden" name="id" id="idNumberSignature">
+            <canvas id="signature-pad" class="border border-dark" ></canvas>
+          </form>
+        </div>
+        <div class="d-flex gap-2">
+          <button type="button" class="btn btn-outline-primary d-grid w-100 mb-5" id="clear">Clear</button>
+          <button type="button" class="btn btn-primary d-grid w-100 mb-5" id="save">Submit</button>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
 @php
   $assessors = collect($assessors)->map(function($assessor) {
   return [
@@ -177,5 +206,59 @@
 @endphp
 <script>
   window.assessors = @json($assessors);
+</script>
+<script>
+  const canvas = document.getElementById('signature-pad');
+  const signaturePad = new SignaturePad(canvas);
+
+  document.getElementById('clear').addEventListener('click', () => {
+      signaturePad.clear();
+  });
+
+  document.getElementById('save').addEventListener('click', () => {
+      if (signaturePad.isEmpty()) {
+          alert("Please provide a signature first.");
+          return;
+      }
+      const id = document.getElementById('idNumberSignature').value;
+      const dataURL = signaturePad.toDataURL('image/png');
+
+      $.ajax({
+        url: 'assessor/e-signature',
+        method: 'POST',
+        cache: false,
+        data: {
+          id: id,
+          signature: dataURL,
+          _token: $('meta[name="csrf-token"]').attr('content'),
+        },
+        dataType: 'json',
+        beforeSend: function () {
+          $('#signatureModal').modal('hide');
+          $('.preloader').show();
+        },
+        success: function (data) {
+          $('.preloader').hide();
+          if (data.Error == 1) {
+            Swal.fire('Error!', data.Message, 'error');
+          } else if (data.Error == 0) {
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Success!',
+              text: data.Message,
+              showConfirmButton: true,
+              confirmButtonText: 'OK'
+            }).then(result => {
+              location.reload();
+            });
+          }
+        },
+        error: function () {
+          $('.preloader').hide();
+          Swal.fire('Error!', 'Something went wrong, please try again.', 'error');
+        }
+      })
+});
 </script>
 @endsection
