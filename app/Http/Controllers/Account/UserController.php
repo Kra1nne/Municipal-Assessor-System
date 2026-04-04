@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Account;
 
-use App\Models\Log;
-use App\Models\User;
-use App\Models\Person;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Log;
+use App\Models\Person;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
 class UserController extends Controller
@@ -63,11 +64,15 @@ class UserController extends Controller
       'created_at' => now()
     ];
 
-    $userData = User::where('id', $id)->update($user);
-    $personData = Person::where('id', $id)->update($person);
+    User::where('id', $id)->update($user);
+    Person::where('id', $id)->update($person);
+
+    if($request->password){
+      User::where('id', $id)->update(['password' => bcrypt($request->password)]);
+    }
 
     $log = [
-      'user_id' =>  $id, //Auth::id()
+      'user_id' => Auth::id(),
       'action' => 'Update',
       'table_name' => 'Users',
       'description' => 'Update a account',

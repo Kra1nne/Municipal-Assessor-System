@@ -160,7 +160,16 @@
               <input type="text" class="form-control" id="Edit_email" name="email" placeholder="Enter your email">
               <label for="email">Email</label>
             </div>
-
+            <div class="mb-5 form-password-toggle">
+              <div class="input-group input-group-merge">
+                <div class="form-floating form-floating-outline">
+                  <input type="password" id="password-reset" class="form-control" name="password" placeholder="(optional)" aria-describedby="password" />
+                  <label for="password">Password</label>
+                </div>
+                <span class="input-group-text cursor-pointer"><i class="ri-eye-off-line ri-20px"></i></span>
+              </div>
+              <div class="invalid-feedback" id="password-error" style="display: none;"></div>
+            </div>
           </form>
         </div>
         <div>

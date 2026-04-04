@@ -18,19 +18,16 @@
                 <h6 class="text-dark mb-3">Quick Links</h6>
                 <ul class="list-unstyled">
                     <li class="mb-2">
-                        <a href="#" class="text-muted text-decoration-none">Dashboard</a>
+                        <a href="{{ route('landing-page') }}" class="text-muted text-decoration-none">Home</a>
                     </li>
                     <li class="mb-2">
-                        <a href="#" class="text-muted text-decoration-none">Property Records</a>
+                        <a href="{{ route('services-page') }}" class="text-muted text-decoration-none">Services</a>
                     </li>
                     <li class="mb-2">
-                        <a href="#" class="text-muted text-decoration-none">Assessments</a>
+                        <a href="{{ route('about-page') }}" class="text-muted text-decoration-none">About</a>
                     </li>
                     <li class="mb-2">
-                        <a href="#" class="text-muted text-decoration-none">Tax Mapping</a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-muted text-decoration-none">Public Assistance</a>
+                        <a href="{{ route('contact-page') }}" class="text-muted text-decoration-none">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -38,17 +35,9 @@
             <!-- System Access -->
             <div class="col-lg-4 col-md-6 mb-3">
                 <h6 class="text-dark mb-3">Download Our App</h6>
-                <p class="text-muted small mb-3">
-                    Municipal Assessor System tasks on the go with our mobile app.
+                <p class="text-muted small mb-0">
+                    Mobile app coming soon. Stay tuned for updates.
                 </p>
-                <div class="d-flex gap-2">
-                    <a href="#" class="btn btn-outline-dark btn-sm">
-                        <i class="ri-apple-fill me-1"></i> App Store
-                    </a>
-                    <a href="#" class="btn btn-outline-dark btn-sm">
-                        <i class="ri-google-play-fill me-1"></i> Google Play
-                    </a>
-                </div>
             </div>
         </div>
     </div>
