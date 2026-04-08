@@ -139,7 +139,7 @@
   <!-- HEADER -->
   <header>
     <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-      <img src="{{ public_path('assets/img/favicon/logo.png') }}" alt="Logo" style="height: 55px;" />
+      <img src="{{ public_path('assets/img/favicon/Logo.png') }}" alt="Logo" style="height: 55px;" />
       <div>
         <h1>MAOMIS SYSTEM REPORTS</h1>
         <div class="sub">Generated on {{ now()->setTimezone('Asia/Manila')->format('M. d, Y') }}</div>

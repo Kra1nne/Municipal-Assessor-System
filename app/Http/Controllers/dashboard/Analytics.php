@@ -67,16 +67,42 @@ class Analytics extends Controller
                 ->get();
     return view('content.dashboard.dashboards-analytics', compact('user', 'log', 'activeUsers', 'inactiveUsers','properties', 'total', 'count', 'completecount', 'completepending', 'marketValues'));
   }
-  public function logslist(){
-    $log = Log::leftjoin('users', 'logs.user_id', '=', 'users.id')
-          ->leftjoin('person', 'users.person_id', '=', 'person.id')
-          ->where('logs.created_at', '>=', Carbon::now()->subDays(30))
-          ->select('logs.*', 'users.*', 'logs.created_at as created_at')
-          ->orderBy('logs.created_at', 'desc')
-          ->get();
+  public function logslist(Request $request){
+      $query = Log::leftjoin('users', 'logs.user_id', '=', 'users.id')
+            ->leftjoin('person', 'users.person_id', '=', 'person.id')
+            ->select('logs.*', 'users.*', 'person.*', 'logs.created_at as created_at');
 
+      // Default: last 30 days (overridden if date range is set)
+      $dateFrom = $request->filled('date_from')
+          ? Carbon::parse($request->date_from)->startOfDay()
+          : Carbon::now()->subDays(30);
 
-    return view('content.logs-list.account-log',compact('log'));
+      $dateTo = $request->filled('date_to')
+          ? Carbon::parse($request->date_to)->endOfDay()
+          : Carbon::now();
+
+      $query->whereBetween('logs.created_at', [$dateFrom, $dateTo]);
+
+      // Search: name, email, action, table
+      if ($request->filled('search')) {
+          $search = $request->search;
+          $query->where(function($q) use ($search) {
+              $q->where('person.firstname', 'like', "%{$search}%")
+                ->orWhere('person.lastname', 'like', "%{$search}%")
+                ->orWhere('users.email', 'like', "%{$search}%")
+                ->orWhere('logs.action', 'like', "%{$search}%")
+                ->orWhere('logs.table_name', 'like', "%{$search}%");
+          });
+      }
+
+      // Filter by role
+      if ($request->filled('role')) {
+          $query->where('users.role', $request->role);
+      }
+
+      $log = $query->orderBy('logs.created_at', 'desc')->get();
+
+      return view('content.logs-list.account-log', compact('log'));
   }
   private function formatAbbreviatedPHP($value) {
         $value = floatval($value);

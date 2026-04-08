@@ -8,13 +8,13 @@
     },
     {
       "url": "/gis-map",
-      "name": "Land Transaction",
+      "name": "Property",
       "icon": "menu-icon tf-icons ri-map-pin-range-line",
       "slug": "map-gis"
     },
     {
       "url": "/myproperty",
-      "name": "Land Property",
+      "name": "Request",
       "icon": "menu-icon tf-icons ri-pin-distance-line",
       "slug": "myproperty"
     }
