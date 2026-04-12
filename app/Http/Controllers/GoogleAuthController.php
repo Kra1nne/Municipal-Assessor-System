@@ -45,7 +45,7 @@ class GoogleAuthController extends Controller
 
             return redirect('/dashboard');
         } else {
-          return redirect()->route('booking')->with('show_modal', true);
+          return redirect()->route('login')->with('show_modal', true);
         }
 
     }
